@@ -32,25 +32,29 @@ class Project extends React.Component {
         {projectData => {
           return (
             <Wrapper title={"Project: " + projectData.name}>
-              <Title>Functions:</Title>
+              <Title sub>Buckets:</Title>
+              {projectData.buckets &&
+                projectData.buckets.map(b => {
+                  return (
+                    <Bucket project={pid} key={b}>
+                      {b}
+                    </Bucket>
+                  );
+                })}
+              <BigButton route={"/project/view/" + pid + "/createBucket"}>
+                + Add a bucket
+              </BigButton>
+              <Spacer />
+              <Title sub>Functions:</Title>
               <CollectionLoader
                 path={path}
                 collection={"functions"}
                 renderItem={i => {
-                  return <FuncRow {...i} />;
+                  return <FuncRow {...i} key={i.name} />;
                 }}
               />
               <BigButton route={"/project/view/" + pid + "/createFunction"}>
                 + Add a function
-              </BigButton>
-              <Spacer />
-              <Title>Buckets:</Title>
-              {projectData.buckets &&
-                projectData.buckets.map(b => {
-                  return <Bucket>{b}</Bucket>;
-                })}
-              <BigButton route={"/project/view/" + pid + "/createBucket"}>
-                + Add a bucket
               </BigButton>
             </Wrapper>
           );

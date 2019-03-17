@@ -102,39 +102,7 @@ class EditFunction extends React.Component {
       return <Wrapper title={"loading..."} />;
     }
     return (
-      <Wrapper title={"Edit function " + this.state.name} showBack>
-        <div>
-          <a
-            styleName="funcLink"
-            target={"_blank"}
-            href={
-              "https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=" +
-              uid +
-              "&pid=" +
-              pid +
-              "&func=" +
-              fid
-            }
-          >
-            https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=
-            {uid}&pid={pid}&func={fid}
-          </a>
-        </div>
-        <div>
-          <CopyToClipboard
-            text={
-              "https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=" +
-              uid +
-              "&pid=" +
-              pid +
-              "&func=" +
-              fid
-            }
-          >
-            <button styleName="clickToCopy">Click to copy</button>
-          </CopyToClipboard>
-        </div>
-        <Spacer />
+      <Wrapper title={"Edit function: " + this.state.name} showBack>
         <LuaBox
           value={this.state.code}
           onChange={s => {
@@ -159,6 +127,37 @@ class EditFunction extends React.Component {
           <div styleName="error">Error: {this.state.errorText}</div>
         )}
         {this.state.status == "done" && <div styleName="done">Saved.</div>}
+        <Spacer />
+        <div>
+          <CopyToClipboard
+            text={
+              "https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=" +
+              uid +
+              "&pid=" +
+              pid +
+              "&func=" +
+              fid
+            }
+          >
+            <button styleName="clickToCopy">Click to copy</button>
+          </CopyToClipboard>
+          <a
+            styleName="funcLink"
+            target={"_blank"}
+            href={
+              "https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=" +
+              uid +
+              "&pid=" +
+              pid +
+              "&func=" +
+              fid
+            }
+          >
+            https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=
+            {uid}&pid={pid}&func={fid}
+          </a>
+        </div>
+        <div />
         <Docs />
       </Wrapper>
     );

@@ -12,5 +12,8 @@ service cloud.firestore {
     match /users/{user}/projects/{proj}/functions/{func} {
       allow read: if request.auth.uid == user;
     }
+    match /users/{user}/projects/{proj}/functions/{func}/buckets/{any=**} {
+      allow read: if request.auth.uid == user;
+    }
   }
 }

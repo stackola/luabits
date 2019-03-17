@@ -99,7 +99,6 @@ class CreateFunction extends React.Component {
       <Wrapper title="Create a function" showBack>
         <BigInput
           placeholder={"Name"}
-          label={"Function name"}
           value={this.state.name}
           onChange={s => {
             this.setState({ name: s });
@@ -112,7 +111,7 @@ class CreateFunction extends React.Component {
             this.send();
           }}
         >
-          Save function
+          Continue
         </BigButton>
         {this.state.status == "error" && (
           <>

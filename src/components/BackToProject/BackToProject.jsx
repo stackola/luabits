@@ -10,7 +10,7 @@ class BackToProject extends React.Component {
         to={"/project/view/" + this.props.match.params.id}
         styleName="BackToProject"
       >
-        &lt; back to project
+        &lt; back
       </Link>
     );
   }

@@ -4,6 +4,7 @@ import style from './<%= slug %>.less';
 import { connect } from 'react-redux';
 import { ActionCreators } from 'redux/actions';
 import { bindActionCreators } from 'redux';
+import { withRouter } from "react-router";
 
 @connect(mapStateToProps, mapDispatchToProps)
 class <%= name %> extends React.Component{
@@ -26,4 +27,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 //Connect to navigation, redux and export
-export default <%= name %>;
+export default withRouter( <%= name %> );

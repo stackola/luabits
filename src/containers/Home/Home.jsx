@@ -20,7 +20,7 @@ class Home extends React.Component {
   render() {
     return (
       <Wrapper title={"Home"}>
-        <Title>Your Projects:</Title>
+        <Title sub>Your Projects:</Title>
         <CollectionLoader
           path={"users/" + getUID()}
           collection={"projects"}

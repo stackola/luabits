@@ -3,6 +3,10 @@ import style from "./Title.less";
 
 export default class Title extends React.Component {
   render() {
-    return <div styleName="Title">{this.props.children}</div>;
+    return (
+      <div styleName={"Title " + (this.props.sub ? "sub" : "")}>
+        {this.props.children}
+      </div>
+    );
   }
 }

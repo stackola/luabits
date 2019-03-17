@@ -17,6 +17,7 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 import CreateBucket from "../CreateBucket/CreateBucket";
 import CreateFunction from "../CreateFunction/CreateFunction";
 import EditFunction from "../EditFunction/EditFunction";
+import Bucket from "../Bucket/Bucket";
 
 @withRouter
 @connect(
@@ -76,6 +77,9 @@ class AppContainer extends Component {
             </Route>
             <Route exact path={"/project/view/:id/editFunction/:fid"}>
               <EditFunction />
+            </Route>
+            <Route exact path={"/project/view/:id/bucket/:bucket"}>
+              <Bucket />
             </Route>
             <Route exact path={"/project/create"}>
               <NewProject />
