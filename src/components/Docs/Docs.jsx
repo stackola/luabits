@@ -25,6 +25,7 @@ export default class Docs extends React.Component {
           <div styleName="row">db.create( bucket, data, callback? )</div>
           <div styleName="row">db.update( bucket, id, data, callback? )</div>
           <div styleName="row">db.get( bucket, id, callback? )</div>
+          <div styleName="row">db.list( bucket, callback? )</div>
           <div styleName="row">
             *db.find( bucket, needle_key, neeld_value, callback? )
           </div>

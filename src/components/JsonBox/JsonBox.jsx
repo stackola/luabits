@@ -24,7 +24,7 @@ export default class JsonBox extends React.Component {
       >
         <AnimateHeight
           duration={500}
-          height={this.state.open ? "auto" : 60} // see props documentation bellow
+          height={this.state.open ? "auto" : 40} // see props documentation bellow
         >
           {JSON.stringify(data, null, 4)}
           <div style={{ height: 8 }} />
