@@ -1,0 +1,42 @@
+@import "../../less/variables.less";
+
+.EditFunction {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.error {
+  white-space: pre;
+  color: lightcoral;
+  margin-top: 12px;
+}
+.done {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.funcLink {
+  color: white;
+}
+
+.clickToCopy {
+  outline: none;
+  border: none;
+  background: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  color: white;
+  font-weight: bold;
+  margin-top: 4px;
+  background: lighten(@background, 5%);
+  transition: background 0.1s;
+  padding: 12px;
+  &:hover {
+    background: lighten(@background, 10%);
+  }
+  &:active {
+    background: lighten(@background, 5%);
+  }
+}

@@ -12,6 +12,11 @@ import { Route, Link, withRouter, Switch, Redirect } from "react-router-dom";
 import Header from "../../components/Header/Header";
 import Home from "../Home/Home";
 import NewProject from "../NewProject/NewProject";
+import Project from "../Project/Project";
+import Wrapper from "../../components/Wrapper/Wrapper";
+import CreateBucket from "../CreateBucket/CreateBucket";
+import CreateFunction from "../CreateFunction/CreateFunction";
+import EditFunction from "../EditFunction/EditFunction";
 
 @withRouter
 @connect(
@@ -60,12 +65,24 @@ class AppContainer extends Component {
             <Route exact path={"/"}>
               <Home />
             </Route>
+            <Route exact path={"/project/view/:id"}>
+              <Project />
+            </Route>
+            <Route exact path={"/project/view/:id/createBucket"}>
+              <CreateBucket />
+            </Route>
+            <Route exact path={"/project/view/:id/createFunction"}>
+              <CreateFunction />
+            </Route>
+            <Route exact path={"/project/view/:id/editFunction/:fid"}>
+              <EditFunction />
+            </Route>
             <Route exact path={"/project/create"}>
               <NewProject />
             </Route>
           </Switch>
         ) : (
-          "loading..."
+          <Wrapper title="Loading..." />
         )}
       </div>
     );
