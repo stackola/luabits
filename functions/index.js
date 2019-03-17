@@ -211,7 +211,7 @@ exports.run = functions.https.onRequest((request, response) => {
                 let d = res.docs.map(snap => {
                   let r = snap.data();
                   if (r.time && r.time.toDate) {
-                    r = { ...r, time: r.time.toDate() };
+                    r.time = r.time.toDate();
                   }
                   return r;
                 });
