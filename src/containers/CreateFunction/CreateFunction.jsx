@@ -96,7 +96,7 @@ class CreateFunction extends React.Component {
   }
   render() {
     return (
-      <Wrapper title="Create a function">
+      <Wrapper title="Create a function" showBack>
         <BigInput
           placeholder={"Name"}
           label={"Function name"}

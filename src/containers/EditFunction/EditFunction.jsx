@@ -102,10 +102,8 @@ class EditFunction extends React.Component {
       return <Wrapper title={"loading..."} />;
     }
     return (
-      <Wrapper title={"Edit function " + this.state.name}>
+      <Wrapper title={"Edit function " + this.state.name} showBack>
         <div>
-          URL:
-          <br />
           <a
             styleName="funcLink"
             target={"_blank"}

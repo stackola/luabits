@@ -41,7 +41,7 @@ class CreateBucket extends React.Component {
   }
   render() {
     return (
-      <Wrapper title={"Create a bucket"}>
+      <Wrapper title={"Create a bucket"} showBack>
         <BigInput
           label={"Bucket name"}
           value={this.state.name}
