@@ -1,0 +1,26 @@
+@import "../../less/variables.less";
+
+.label {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: @textMinor;
+}
+.BigInput {
+  display: flex;
+  flex: 1;
+  font-size: 20px;
+  background: lighten(@background, 5%);
+  text-align: center;
+  color: @text;
+  border: none;
+  height: 50px;
+  outline: none;
+
+  transition: background 0.5s;
+  border-bottom: 1px solid @textMinor;
+  &:hover,
+  &:focus,
+  &:active {
+    background: lighten(@background, 10%);
+  }
+}

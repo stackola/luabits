@@ -1,0 +1,51 @@
+{
+  "name": "react_starter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "./node_modules/.bin/webpack-dev-server --env.NODE_ENV=local --hot --history-api-fallback --open --content-base=public/ --host 0.0.0.0",
+    "build": "./node_modules/.bin/webpack -w -d --env.NODE_ENV=development",
+    "compile": "npm run build",
+    "prod": "./node_modules/.bin/webpack -p --env.NODE_ENV=production"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-decorators": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-transform-destructuring": "^7.0.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-react-css-modules": "^5.2.0",
+    "firebase": "^5.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.8.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.0.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
+    "postcss-less": "^3.1.2",
+    "react-hot-loader": "^4.0.1",
+    "style-loader": "^0.23.0",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.3",
+    "whatwg-fetch": "^2.0.3"
+  }
+}
