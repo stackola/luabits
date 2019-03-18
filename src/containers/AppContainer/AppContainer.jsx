@@ -18,6 +18,10 @@ import CreateBucket from "../CreateBucket/CreateBucket";
 import CreateFunction from "../CreateFunction/CreateFunction";
 import EditFunction from "../EditFunction/EditFunction";
 import Bucket from "../Bucket/Bucket";
+import GettingStarted from "../GettingStarted/GettingStarted";
+import Pricing from "../Pricing/Pricing";
+import DocsPage from "../DocsPage/DocsPage";
+import Examples from "../Examples/Examples";
 
 @withRouter
 @connect(
@@ -65,6 +69,18 @@ class AppContainer extends Component {
           <Switch>
             <Route exact path={"/"}>
               <Home />
+            </Route>
+            <Route exact path={"/getting-started"}>
+              <GettingStarted />
+            </Route>
+            <Route exact path={"/pricing"}>
+              <Pricing />
+            </Route>
+            <Route exact path={"/docs"}>
+              <DocsPage />
+            </Route>
+            <Route exact path={"/examples"}>
+              <Examples />
             </Route>
             <Route exact path={"/project/view/:id"}>
               <Project />

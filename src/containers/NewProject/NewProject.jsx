@@ -8,7 +8,7 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 import BigInput from "../../components/BigInput/BigInput";
 import Spacer from "../../components/Spacer/Spacer";
 import BigButton from "../../components/BigButton/BigButton";
-import { newProject } from "lib/index";
+import { newProject, sanitize } from "lib/index";
 
 import { withRouter } from "react-router";
 
@@ -43,10 +43,10 @@ class NewProject extends React.Component {
     return (
       <Wrapper title={"Create new project"}>
         <BigInput
-          label={"Project name"}
+          placeholder={"project-name"}
           value={this.state.name}
           onChange={t => {
-            this.setState({ name: t });
+            this.setState({ name: sanitize(t) });
           }}
         />
         <Spacer />

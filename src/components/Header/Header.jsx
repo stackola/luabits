@@ -10,6 +10,24 @@ export default class Header extends React.Component {
             luabits.com
           </Link>
           <div>| alpha</div>
+          <div style={{ flex: 1 }} />
+          <div styleName="nav">
+            <Link to="/" styleName="navItem">
+              Home
+            </Link>
+            <Link to="/getting-started" styleName="navItem">
+              Getting started
+            </Link>
+            <Link to="/pricing" styleName="navItem">
+              Pricing
+            </Link>
+            <Link to="/examples" styleName="navItem">
+              Examples
+            </Link>
+            <Link to="/docs" styleName="navItem">
+              Docs
+            </Link>
+          </div>
         </div>
       </div>
     );

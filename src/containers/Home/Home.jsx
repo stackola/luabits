@@ -25,7 +25,7 @@ class Home extends React.Component {
           path={"users/" + getUID()}
           collection={"projects"}
           renderItem={i => {
-            return <ProjRow {...i} />;
+            return <ProjRow {...i} key={i.name} />;
           }}
         />
         <BigButton route={"/project/create"}>+ Create a new project</BigButton>

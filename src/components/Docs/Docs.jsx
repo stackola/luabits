@@ -6,7 +6,6 @@ export default class Docs extends React.Component {
   render() {
     return (
       <div styleName="Docs">
-        <Title sub>Available APIs:</Title>
         <div styleName="section">
           <div styleName="sub">query</div>
           <div styleName="row">

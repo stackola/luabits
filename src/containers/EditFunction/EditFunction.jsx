@@ -16,6 +16,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { withRouter } from "react-router";
 import firebase from "lib/firebase";
 import Docs from "../../components/Docs/Docs";
+import Title from "../../components/Title/Title";
 @connect(
   mapStateToProps,
   mapDispatchToProps
@@ -158,6 +159,7 @@ class EditFunction extends React.Component {
           </a>
         </div>
         <div />
+        <Title sub>Available APIs:</Title>
         <Docs />
       </Wrapper>
     );

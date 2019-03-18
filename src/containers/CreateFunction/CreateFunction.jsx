@@ -9,7 +9,7 @@ import LuaBox from "../../components/LuaBox/LuaBox";
 import BigInput from "../../components/BigInput/BigInput";
 import Spacer from "../../components/Spacer/Spacer";
 import BigButton from "../../components/BigButton/BigButton";
-import { compileLua, addFunction } from "../../lib";
+import { compileLua, addFunction, sanitize } from "../../lib";
 
 import { withRouter } from "react-router";
 import Docs from "../../components/Docs/Docs";
@@ -98,10 +98,10 @@ class CreateFunction extends React.Component {
     return (
       <Wrapper title="Create a function" showBack>
         <BigInput
-          placeholder={"Name"}
+          placeholder={"function-name"}
           value={this.state.name}
           onChange={s => {
-            this.setState({ name: s });
+            this.setState({ name: sanitize(s) });
           }}
         />
         <Spacer />

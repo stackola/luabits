@@ -10,7 +10,7 @@ import BigButton from "../../components/BigButton/BigButton";
 import Spacer from "../../components/Spacer/Spacer";
 
 import { withRouter } from "react-router";
-import { addBucket } from "../../lib";
+import { addBucket, sanitize } from "../../lib";
 
 @connect(
   mapStateToProps,
@@ -43,10 +43,10 @@ class CreateBucket extends React.Component {
     return (
       <Wrapper title={"Create a bucket"} showBack>
         <BigInput
-          label={"Bucket name"}
+          placeholder={"bucket-name"}
           value={this.state.name}
           onChange={t => {
-            this.setState({ name: t });
+            this.setState({ name: sanitize(t) });
           }}
         />
         <Spacer />
