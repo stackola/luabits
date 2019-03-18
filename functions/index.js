@@ -230,6 +230,47 @@ exports.run = functions.https.onRequest((request, response) => {
                 }
               });
           },
+          findAll: (bucket, nkey, op, nvalue, cb) => {
+            //fetch id item from bucket.
+            if (!projData.buckets.includes(bucket)) {
+              console.log("illegal bucket");
+              if (cb) {
+                cb.call(null, false);
+              } else {
+                response.json({ status: "error", text: "Illegal bucket" });
+              }
+              return;
+            }
+            projectRef
+              .collection("buckets")
+              .doc("main")
+              .collection(bucket)
+              .where(nkey, op, nvalue)
+              .get()
+              .then(res => {
+                console.log(res);
+                let d = res.docs.map(snap => {
+                  let r = snap.data();
+                  if (r.time && r.time.toDate) {
+                    r.time = r.time.toDate();
+                  }
+                  return r;
+                });
+                console.log(d);
+                if (cb) {
+                  cb.call(null, d);
+                } else {
+                  response.json({ status: "ok", data: d });
+                }
+              })
+              .catch(e => {
+                if (cb) {
+                  cb.call(null, false);
+                } else {
+                  response.json({ status: "error", code: e });
+                }
+              });
+          },
           create: (bucket, data, cb) => {
             console.log("creating-");
             if (!projData.buckets.includes(bucket)) {

@@ -22,12 +22,25 @@ export default class Docs extends React.Component {
         </div>
         <div styleName="section">
           <div styleName="sub">db</div>
-          <div styleName="row">db.create( bucket, data, callback? )</div>
-          <div styleName="row">db.update( bucket, id, data, callback? )</div>
-          <div styleName="row">db.get( bucket, id, callback? )</div>
-          <div styleName="row">db.list( bucket, callback? )</div>
           <div styleName="row">
-            *db.find( bucket, needle_key, neeld_value, callback? )
+            db.create( bucket, data, callback( newId )? )
+          </div>
+          <div styleName="row">
+            db.update( bucket, id, data, callback( success_bool )? )
+          </div>
+          <div styleName="row">
+            db.get( bucket, id, callback( object|false )? )
+          </div>
+          <div styleName="row">
+            db.list( bucket, callback( [object]|false )? )
+          </div>
+          <div styleName="row">
+            db.findAll( bucket, needle_key, operator, neeld_value, callback(
+            [object]|false )? )
+          </div>
+          <div styleName="row">
+            operator can be either &lt;, &lt;=, ==, &gt;, &gt;=, or
+            array_contains
           </div>
         </div>
 
