@@ -13,7 +13,55 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 )
 class GettingStarted extends React.Component {
   render() {
-    return <Wrapper title={"Getting started"} />;
+    return (
+      <Wrapper title={"Getting started"}>
+        <div styleName="mid">
+          Luabits let's you deploy web-scale lua functions to the cloud in 3
+          clicks.
+          <br />
+          How's that for buzzwords.
+        </div>
+
+        <br />
+        <div styleName="big">Functions</div>
+        <div styleName="mid">
+          Write and deploy LUA functions, straight to the cloud.
+          <br />
+          Your functions can be called via https, and usually return JSON.
+          <br />
+          Functions have access to your buckets, along with a list of other
+          utilities, like logging and controlling the HTTPS response.
+        </div>
+        <br />
+        <div styleName="big">Buckets</div>
+        <div styleName="mid">
+          Buckets hold your data. The latest in bucket based no-sql datastorage
+          allows you to create, read, update, delete or list JSON objects.
+          <br />
+          Put stuff in, take stuff out. Buckets.
+          <br />
+          Create one or multiple buckets in your project's settings.
+          <br />
+          You can click on a bucket to inspect it's contents.
+          <br />
+          Buckets are identiefied by their name, which has to be unique within a
+          project's scope.
+        </div>
+        <br />
+
+        <div styleName="big">Getting started is simple.</div>
+        <div styleName="listItem">1. Create a project.</div>
+        <div styleName="listItem">
+          2. Create 0 or more buckets, depending on your needs.
+        </div>
+        <div styleName="listItem">3. Write and deploy your lua function</div>
+        <br />
+        <div styleName="small">
+          Note: Project / bucket / function names can only contain lower case
+          letters and '-'
+        </div>
+      </Wrapper>
+    );
   }
 }
 

@@ -72,8 +72,14 @@ export default class Docs extends React.Component {
           <div styleName="sub big">res</div>
           <div styleName="sub">res.send</div>
           <div styleName="row">
-            res.send( data )<br />
-            Send a positive HTTPS response
+            res.send( string )<br />
+            Send a positive HTTPS response containing the supplied string.
+          </div>
+          <br />
+          <div styleName="sub">res.json</div>
+          <div styleName="row">
+            res.json( data )<br />
+            Send a positive HTTPS response with a JSON payload
           </div>
           <br />
           <div styleName="sub">res.error</div>

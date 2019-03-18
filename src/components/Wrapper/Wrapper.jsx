@@ -8,7 +8,7 @@ export default class Wrapper extends React.Component {
     return (
       <div styleName="Wrapper">
         {this.props.showBack && <BackToProject />}
-        <Title>{this.props.title}</Title>
+        {this.props.title && <Title>{this.props.title}</Title>}
         {this.props.children}
       </div>
     );

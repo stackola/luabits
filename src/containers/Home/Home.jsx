@@ -19,7 +19,12 @@ import FirebaseTable from "../../components/FirebaseTable/FirebaseTable";
 class Home extends React.Component {
   render() {
     return (
-      <Wrapper title={"Home"}>
+      <Wrapper>
+        <div styleName="big">
+          Luabits.com let's you deploy scalable LUA functions to the cloud in 3
+          clicks.
+        </div>
+
         <Title sub>Your Projects:</Title>
         <FirebaseTable
           hideEmpty

@@ -65,7 +65,7 @@ class CreateFunction extends React.Component {
         1,
         0
       ],
-      constants: ["res", "send", "Hello luabits!"],
+      constants: ["res", "json", "Hello luabits!"],
       functions: [],
       linePositions: [2, 2, 2, 2, 2],
       locals: [],

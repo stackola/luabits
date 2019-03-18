@@ -352,7 +352,10 @@ exports.run = functions.https.onRequest((request, response) => {
           }
         },
         res: {
-          send: d => {
+          send: s => {
+            response.send(s);
+          },
+          json: d => {
             d = JSON.parse(JSON.stringify(d));
             delete d.__shine;
             response.json({ status: "ok", data: d });

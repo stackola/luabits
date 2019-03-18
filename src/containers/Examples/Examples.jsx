@@ -6,6 +6,7 @@ import { ActionCreators } from "redux/actions";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import Wrapper from "../../components/Wrapper/Wrapper";
+import Example from "../../components/Example/Example";
 
 @connect(
   mapStateToProps,
@@ -13,7 +14,18 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 )
 class Examples extends React.Component {
   render() {
-    return <Wrapper title={"Examples"} />;
+    return (
+      <Wrapper title={"Examples"}>
+        <Example
+          text="The simplest cloud function you could write."
+          code={"res.json('Hello World!')"}
+          response={{ status: "ok", data: "Hello World!" }}
+          name="Basic cloud function"
+          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=10fIQQ4a6sblWn0OEHaYrNd2V2x1&pid=es&func=sd"
+        />
+        <Example name="Getting data from the URL" text="" />
+      </Wrapper>
+    );
   }
 }
 
