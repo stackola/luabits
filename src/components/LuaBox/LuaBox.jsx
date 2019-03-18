@@ -1,6 +1,8 @@
 import React from "react";
 import CodeMirror from "react-codemirror";
 import "codemirror/lib/codemirror.css";
+import "./theme.less";
+import "./LuaBox.less";
 require("codemirror/mode/lua/lua");
 
 export default class LuaBox extends React.Component {
@@ -8,7 +10,8 @@ export default class LuaBox extends React.Component {
     return (
       <>
         <CodeMirror
-          options={{ mode: "lua" }}
+          styleName={"LuaBox"}
+          options={{ mode: "lua", theme: "oceanic-next", lineNumbers: true }}
           value={this.props.value}
           onChange={c => {
             console.log("change");

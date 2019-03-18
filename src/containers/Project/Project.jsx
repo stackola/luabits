@@ -14,6 +14,7 @@ import Title from "../../components/Title/Title";
 import Bucket from "../../components/Bucket/Bucket";
 import FuncRow from "../../components/FuncRow/FuncRow";
 import FirebaseTable from "../../components/FirebaseTable/FirebaseTable";
+import Loading from "../../components/Loading/Loading";
 
 @connect(
   mapStateToProps,
@@ -24,11 +25,7 @@ class Project extends React.Component {
     let pid = this.props.match.params.id;
     let path = "users/" + getUID() + "/projects/" + pid;
     return (
-      <ItemLoader
-        key={pid}
-        path={path}
-        loading={<Wrapper title={"Loading..."} />}
-      >
+      <ItemLoader key={pid} path={path} loading={<Loading />}>
         {projectData => {
           return (
             <Wrapper title={"Project: " + projectData.name}>

@@ -22,6 +22,7 @@ import GettingStarted from "../GettingStarted/GettingStarted";
 import Pricing from "../Pricing/Pricing";
 import DocsPage from "../DocsPage/DocsPage";
 import Examples from "../Examples/Examples";
+import Loading from "../../components/Loading/Loading";
 
 @withRouter
 @connect(
@@ -102,7 +103,7 @@ class AppContainer extends Component {
             </Route>
           </Switch>
         ) : (
-          <Wrapper title="Loading..." />
+          <Loading />
         )}
       </div>
     );

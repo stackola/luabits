@@ -81,6 +81,12 @@ export default class Docs extends React.Component {
             res.error( data )<br />
             Send an error response via HTTPS
           </div>
+          <br />
+          <div styleName="sub">res.redirect</div>
+          <div styleName="row">
+            res.redirect( string:URL )<br />
+            Redirect the caller to a http(s) address.
+          </div>
         </div>
         <br />
         <div styleName="section">

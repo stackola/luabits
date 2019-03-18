@@ -3,6 +3,7 @@ import style from "./FirebaseTable.less";
 import firebase from "lib/firebase";
 
 import ReactLoading from "react-loading";
+import BigButton from "../BigButton/BigButton";
 export default class FirebaseTable extends React.Component {
   constructor(props) {
     super(props);
@@ -71,14 +72,7 @@ export default class FirebaseTable extends React.Component {
           return this.props.renderItem(data);
         })}
         {this.state.hasMore && !this.state.loading && (
-          <div
-            styleName={
-              "loadMore " + (this.props.horizontal ? "horizontal" : "")
-            }
-            onClick={() => this.loadMore()}
-          >
-            Load more
-          </div>
+          <BigButton onClick={() => this.loadMore()}>Load more</BigButton>
         )}
         {this.state.loading &&
           (this.props.loading ? (

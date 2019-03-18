@@ -23,7 +23,7 @@ class CreateFunction extends React.Component {
     super(props);
 
     this.state = {
-      code: 'response.send("Hello luabits!")',
+      code: 'res.send("Hello luabits!")',
       name: "",
       status: "start"
     };
@@ -65,7 +65,7 @@ class CreateFunction extends React.Component {
         1,
         0
       ],
-      constants: ["response", "send", "Hello luabits!"],
+      constants: ["res", "send", "Hello luabits!"],
       functions: [],
       linePositions: [2, 2, 2, 2, 2],
       locals: [],

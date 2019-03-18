@@ -17,6 +17,8 @@ import { withRouter } from "react-router";
 import firebase from "lib/firebase";
 import Docs from "../../components/Docs/Docs";
 import Title from "../../components/Title/Title";
+import LogViewer from "../../components/LogViewer/LogViewer";
+import Loading from "../../components/Loading/Loading";
 @connect(
   mapStateToProps,
   mapDispatchToProps
@@ -100,7 +102,7 @@ class EditFunction extends React.Component {
     let uid = getUID();
     let fid = this.props.match.params.fid;
     if (this.state.loading) {
-      return <Wrapper title={"loading..."} />;
+      return <Loading />;
     }
     return (
       <Wrapper title={"Edit function: " + this.state.name} showBack>
@@ -159,6 +161,9 @@ class EditFunction extends React.Component {
           </a>
         </div>
         <div />
+        <Spacer />
+        <LogViewer {...{ pid, uid, fid }} />
+
         <Title sub>Available APIs:</Title>
         <Docs />
       </Wrapper>
