@@ -7,10 +7,10 @@ import { bindActionCreators } from "redux";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import BigButton from "../../components/BigButton/BigButton";
 import Spacer from "../../components/Spacer/Spacer";
-import CollectionLoader from "../../components/CollectionLoader/CollectionLoader";
 import { getUID } from "../../lib";
 import ProjRow from "../../components/ProjRow/ProjRow";
 import Title from "../../components/Title/Title";
+import FirebaseTable from "../../components/FirebaseTable/FirebaseTable";
 
 @connect(
   mapStateToProps,
@@ -21,13 +21,15 @@ class Home extends React.Component {
     return (
       <Wrapper title={"Home"}>
         <Title sub>Your Projects:</Title>
-        <CollectionLoader
-          path={"users/" + getUID()}
-          collection={"projects"}
+        <FirebaseTable
+          hideEmpty
+          pageSize={5}
+          path={"users/" + getUID() + "/projects"}
           renderItem={i => {
             return <ProjRow {...i} key={i.name} />;
           }}
         />
+
         <BigButton route={"/project/create"}>+ Create a new project</BigButton>
       </Wrapper>
     );

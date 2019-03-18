@@ -12,8 +12,8 @@ import BigButton from "../../components/BigButton/BigButton";
 import Spacer from "../../components/Spacer/Spacer";
 import Title from "../../components/Title/Title";
 import Bucket from "../../components/Bucket/Bucket";
-import CollectionLoader from "../../components/CollectionLoader/CollectionLoader";
 import FuncRow from "../../components/FuncRow/FuncRow";
+import FirebaseTable from "../../components/FirebaseTable/FirebaseTable";
 
 @connect(
   mapStateToProps,
@@ -46,9 +46,10 @@ class Project extends React.Component {
               </BigButton>
               <Spacer />
               <Title sub>Functions:</Title>
-              <CollectionLoader
-                path={path}
-                collection={"functions"}
+              <FirebaseTable
+                hideEmpty
+                pageSize={10}
+                path={path + "/functions"}
                 renderItem={i => {
                   return <FuncRow {...i} key={i.name} />;
                 }}

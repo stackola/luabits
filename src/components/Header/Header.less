@@ -10,6 +10,12 @@
   margin: 0 auto;
   height: 60px;
   display: flex;
+  padding-left: 12px;
+  padding-right: 12px;
+  align-items: center;
+}
+.logoWrapper {
+  display: flex;
   align-items: center;
 }
 
@@ -28,5 +34,18 @@
   text-decoration: none;
   &:hover {
     text-decoration: underline;
+  }
+}
+
+.flexSpacer {
+  flex: 1;
+}
+@media only screen and (max-width: 700px) {
+  .inner {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+  .flexSpacer {
+    display: none;
   }
 }

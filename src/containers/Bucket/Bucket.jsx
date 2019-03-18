@@ -27,6 +27,7 @@ class Bucket extends React.Component {
       <Wrapper title={"Bucket: " + bucket} showBack>
         <FirebaseTable
           path={path}
+          showEnd
           pageSize={10}
           order={["time", "desc"]}
           renderItem={i => {

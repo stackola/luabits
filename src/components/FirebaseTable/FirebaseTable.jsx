@@ -2,6 +2,7 @@ import React from "react";
 import style from "./FirebaseTable.less";
 import firebase from "lib/firebase";
 
+import ReactLoading from "react-loading";
 export default class FirebaseTable extends React.Component {
   constructor(props) {
     super(props);
@@ -88,9 +89,27 @@ export default class FirebaseTable extends React.Component {
                 "loading " + (this.props.horizontal ? "horizontal" : "")
               }
             >
-              <div>Loading...</div>
+              <div>
+                <ReactLoading
+                  type={"spin"}
+                  color={"white"}
+                  height={20}
+                  width={20}
+                />
+              </div>
             </div>
           ))}
+        {!this.state.loading &&
+          this.state.items.length == 0 &&
+          !this.props.hideEmpty && (
+            <div styleName="loading">No items found.</div>
+          )}
+        {!this.state.loading &&
+          !this.state.hasMore &&
+          this.props.showEnd &&
+          this.state.items.length > 0 && (
+            <div styleName="loading">End reached.</div>
+          )}
       </div>
     );
   }

@@ -153,8 +153,10 @@ exports.run = functions.https.onRequest((request, response) => {
       let projData = projObj.data();
       console.log(projData.buckets);
       let env = {
-        json: data,
-        query: request.query,
+        req: {
+          json: data,
+          query: request.query
+        },
         db: {
           get: (bucket, id, cb) => {
             //fetch id item from bucket.
@@ -349,7 +351,7 @@ exports.run = functions.https.onRequest((request, response) => {
               });
           }
         },
-        response: {
+        res: {
           send: d => {
             d = JSON.parse(JSON.stringify(d));
             delete d.__shine;
@@ -362,8 +364,22 @@ exports.run = functions.https.onRequest((request, response) => {
           }
         },
         utils: {
-          log: message => {
-            console.log("Message from Lua: " + message);
+          log: (message, cb) => {
+            //save log entry for function to db.
+            let logEntry = funcRef.collection("logs").doc();
+            logEntry
+              .set({
+                message: message,
+                time: admin.firestore.FieldValue.serverTimestamp(),
+                func: func,
+                id: logEntry.id
+              })
+              .then(() => {
+                cb && cb.call(null, true);
+              })
+              .catch(() => {
+                cb && cb.call(null, false);
+              });
           }
         }
       };

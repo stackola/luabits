@@ -6,11 +6,13 @@ export default class Header extends React.Component {
     return (
       <div styleName="Header">
         <div styleName="inner">
-          <Link styleName="logo" to={"/"}>
-            luabits.com
-          </Link>
-          <div>| alpha</div>
-          <div style={{ flex: 1 }} />
+          <div styleName="logoWrapper">
+            <Link styleName="logo" to={"/"}>
+              luabits.com
+            </Link>
+            <div>| alpha</div>
+          </div>
+          <div styleName="flexSpacer" />
           <div styleName="nav">
             <Link to="/" styleName="navItem">
               Home

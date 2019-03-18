@@ -7,7 +7,7 @@ import store from "redux/store";
 //import AppContainer from './app/containers/AppContainer.js'
 import AppContainer from "./containers/AppContainer";
 
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const render = Component => {
   ReactDOM.render(
