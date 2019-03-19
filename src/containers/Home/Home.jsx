@@ -53,7 +53,7 @@ class Home extends React.Component {
             data: { dateString: "today is Monday, in March" }
           }}
           json
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-2"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=json-example"
         />
         <Example
           extraClass="bigger"
@@ -65,10 +65,48 @@ class Home extends React.Component {
           code={
             "todo = req.query.todo -- get URL query parameter\n\nif todo then\n  -- add to previously created bucket 'todos'\n  -- no callback supplied means a standard json response will be generated.\n  db.create('todos', {todo = todo, completed = false})\nelse\n  res.error({message = 'No todo supplied.'})\nend"
           }
-          response={{ status: "ok", data: { newId: "5xyGEmRu9jHNvStiXVAX" } }}
+          response={{
+            status: "ok",
+            data: {
+              item: {
+                completed: false,
+                id: "pE12Id3gktT93AqLrTiC",
+                time: "2019-03-19T17:05:08.805Z",
+                todo: "Shopping"
+              }
+            }
+          }}
           json
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-4&todo=Shopping"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=add-to-bucket&todo=Shopping"
         />
+        <Example
+          extraClass="bigger"
+          name="Getting an item from a bucket"
+          noPadding
+          text={
+            "In this example, we are retrieving an item previously added to our bucket.\n\n"
+          }
+          code={
+            "todoId = req.query.todoId\n\nif todoId then\n  -- If you don't supply a callback, a standard response is generated\n  db.get('todos',todoId)\nelse\n  res.error({message = 'No todoId given'})\nend"
+          }
+          response={{
+            status: "ok",
+            data: {
+              item: {
+                completed: false,
+                id: "pE12Id3gktT93AqLrTiC",
+                time: "2019-03-19T17:05:08.805Z",
+                todo: "Shopping"
+              }
+            }
+          }}
+          json
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=get-from-bucket&todoId=pE12Id3gktT93AqLrTiC"
+        />
+        <BigButton route={"/examples"}>View more examples</BigButton>
+        <div style={{ height: 12 }} />
+        <BigButton route={"/project/create"}>Get started</BigButton>
+        <div style={{ height: 40 }} />
       </Wrapper>
     );
   }

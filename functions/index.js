@@ -29,7 +29,7 @@ exports.makeUser = functions.auth.user().onCreate(user => {
         id: uid,
         name: randomName,
         credits: defaultBalance,
-        time: admin.firestore.FieldValue.serverTimestamp()
+        time: new Date()
       },
       { merge: true }
     );
@@ -56,7 +56,7 @@ exports.newProject = functions.https.onCall((data, context) => {
       id: id,
       user: uid,
       name: name,
-      time: admin.firestore.FieldValue.serverTimestamp()
+      time: new Date()
     })
     .then(() => {
       //created project.
@@ -128,7 +128,7 @@ exports.addFunction = functions.https.onCall((data, context) => {
       user: uid,
       source: source,
       byteCode: byteCode,
-      time: admin.firestore.FieldValue.serverTimestamp()
+      time: new Date()
     })
     .then(res => {
       return { status: "ok", newFunction: name };
@@ -177,7 +177,9 @@ exports.run = functions.https.onRequest((request, response) => {
               .get()
               .then(res => {
                 let d = res.data();
-                d.time = d.time.toDate();
+                if (d.time) {
+                  d.time = d.time.toDate();
+                }
                 if (cb) {
                   cb.call(null, d);
                 } else {
@@ -211,7 +213,7 @@ exports.run = functions.https.onRequest((request, response) => {
               .collection(bucket)
               .doc();
             data.id = newEntry.id;
-            data.time = admin.firestore.FieldValue.serverTimestamp();
+            data.time = new Date();
             newEntry
               .create(data)
               .then(() => {
@@ -220,7 +222,7 @@ exports.run = functions.https.onRequest((request, response) => {
                   cb.call(null, newEntry.id);
                 } else {
                   console.log("sending default response.");
-                  response.json({ status: "ok", data: { newId: newEntry.id } });
+                  response.json({ status: "ok", data: { item: data } });
                 }
               })
               .catch(e => {
@@ -297,7 +299,7 @@ exports.run = functions.https.onRequest((request, response) => {
             logEntry
               .set({
                 message: message,
-                time: admin.firestore.FieldValue.serverTimestamp(),
+                time: new Date(),
                 func: func,
                 id: logEntry.id
               })
@@ -360,7 +362,7 @@ exports.updateFunction = functions.https.onCall((data, context) => {
     .update({
       source: source,
       byteCode: byteCode,
-      time: admin.firestore.FieldValue.serverTimestamp()
+      time: new Date()
     })
     .then(res => {
       return { status: "ok" };

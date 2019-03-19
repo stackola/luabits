@@ -21,7 +21,7 @@ class Examples extends React.Component {
           text="The simplest cloud function you could write."
           code={"res.send('Hello World!')"}
           response={"Hello World!"}
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-1"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=hello-cloud"
         />
         <Example
           name="Returning JSON"
@@ -32,7 +32,7 @@ class Examples extends React.Component {
             data: { dateString: "today is Monday, in March" }
           }}
           json
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-2"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=json-example"
         />
         <Example
           extraClass="bigger"
@@ -45,7 +45,7 @@ class Examples extends React.Component {
           }
           response={{ status: "ok", data: { result: 24 } }}
           json
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-3&number=999"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=get-url-params&number=99"
         />
         <Example
           extraClass="bigger"
@@ -56,9 +56,19 @@ class Examples extends React.Component {
           code={
             "todo = req.query.todo\n\nif todo then\n  -- add to previously created bucket 'todos'\n  -- no callback supplied means a standard json response will be generated.\n  db.create('todos', {todo = todo, completed = false})\nelse\n  res.error({message = 'No todo supplied.'})\nend"
           }
-          response={{ status: "ok", data: { newId: "5xyGEmRu9jHNvStiXVAX" } }}
+          response={{
+            status: "ok",
+            data: {
+              item: {
+                todo: "Shopping",
+                completed: false,
+                id: "pE12Id3gktT93AqLrTiC",
+                time: "2019-03-19T17:05:08.805Z"
+              }
+            }
+          }}
           json
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-4&todo=Shopping"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=add-to-bucket&todo=Shopping"
         />
         <Example
           extraClass="bigger"
@@ -73,15 +83,15 @@ class Examples extends React.Component {
             status: "ok",
             data: {
               item: {
-                time: "2019-03-18T23:53:25.900Z",
+                completed: false,
+                time: "2019-03-19T17:05:08.805Z",
                 todo: "Shopping",
-                id: "KsK4ikFd7xuYWT7SIv3C",
-                completed: false
+                id: "pE12Id3gktT93AqLrTiC"
               }
             }
           }}
           json
-          link="https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=example-5&todoId=KsK4ikFd7xuYWT7SIv3C"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=get-from-bucket&todoId=pE12Id3gktT93AqLrTiC"
         />
       </Wrapper>
     );
