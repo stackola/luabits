@@ -13,26 +13,9 @@ retrieve user data
 make user variable available
 
 backend sandbox
-homepage
-docs
 getting started
+
 templates
-short, sensible urls!
+
 billing
 my profile?
-
-
-list(bucket, options, callback(response))
-options:
-{
-    order:[field, direction] // default is "time", "desc"
-    or
-    where:[field, operator, needle]
-    pageSize:number(1-25)    // default is 10
-    pageToken:string         // get the next page
-}
-response:
-{
-    items:[object],
-    pageToken:string||false,
-}

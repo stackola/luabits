@@ -13,23 +13,25 @@ export default class Header extends React.Component {
             <div>| pre-pre-alpha</div>
           </div>
           <div styleName="flexSpacer" />
-          <div styleName="nav">
-            <Link to="/" styleName="navItem">
-              Home
-            </Link>
-            <Link to="/projects" styleName="navItem">
-              Your projects
-            </Link>
-            <Link to="/getting-started" styleName="navItem">
-              Getting started
-            </Link>
-            <Link to="/examples" styleName="navItem">
-              Examples
-            </Link>
-            <Link to="/docs" styleName="navItem">
-              Docs
-            </Link>
-          </div>
+          {!this.props.hideNav && (
+            <div styleName="nav">
+              <Link to="/" styleName="navItem">
+                Home
+              </Link>
+              <Link to="/projects" styleName="navItem">
+                Your projects
+              </Link>
+              <Link to="/getting-started" styleName="navItem">
+                Getting started
+              </Link>
+              <Link to="/examples" styleName="navItem">
+                Examples
+              </Link>
+              <Link to="/docs" styleName="navItem">
+                Docs
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );

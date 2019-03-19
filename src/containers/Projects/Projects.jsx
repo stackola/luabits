@@ -9,7 +9,8 @@ import Wrapper from "../../components/Wrapper/Wrapper";
 import FirebaseTable from "../../components/FirebaseTable/FirebaseTable";
 import ProjRow from "../../components/ProjRow/ProjRow";
 import BigButton from "../../components/BigButton/BigButton";
-import { getUID } from "../../lib";
+import { getUID, hasGoogle } from "../../lib";
+import LinkAccountArea from "../../components/LinkAccountArea/LinkAccountArea";
 
 @connect(
   mapStateToProps,
@@ -19,14 +20,15 @@ class Projects extends React.Component {
   render() {
     return (
       <Wrapper title={"Your projects"}>
+        {!hasGoogle() && <LinkAccountArea />}
         <FirebaseTable
-          hideEmpty
           pageSize={5}
           path={"users/" + getUID() + "/projects"}
           renderItem={i => {
             return <ProjRow {...i} key={i.name} />;
           }}
         />
+        <div style={{ height: 4 }} />
 
         <BigButton route={"/project/create"}>+ Create a new project</BigButton>
       </Wrapper>

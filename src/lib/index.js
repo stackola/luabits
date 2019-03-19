@@ -36,3 +36,12 @@ export function sanitize(s) {
     .replace(/ /g, "-")
     .replace(/[^a-z0-9\-]/gi, "");
 }
+
+export function hasGoogle() {
+  console.log(firebase.auth().currentUser);
+  let res =
+    firebase.auth().currentUser.providerData.map(pd => {
+      return pd.providerId == "google.com";
+    }).length > 0;
+  return res;
+}

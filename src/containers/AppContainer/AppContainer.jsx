@@ -24,6 +24,8 @@ import DocsPage from "../DocsPage/DocsPage";
 import Examples from "../Examples/Examples";
 import Loading from "../../components/Loading/Loading";
 import Projects from "../Projects/Projects";
+import { getUID } from "../../lib";
+import BigButton from "../../components/BigButton/BigButton";
 
 @withRouter
 @connect(
@@ -34,37 +36,79 @@ class AppContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      loading: false,
+      wasLoggedIn: false
     };
   }
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(a => {
       console.log("THAT CHANGE!", a);
-      if (a.uid) {
-        this.setState({ loggedIn: true });
+      if (a && a.uid) {
+        this.setState({ loggedIn: true, wasLoggedIn: true });
         this.props.userSubscribe();
       }
-    });
-    firebase
-      .auth()
-      .setPersistence(firebase2.auth.Auth.Persistence.LOCAL)
-      .then(() => {
+      if (a == null) {
+        this.setState({ loggedIn: false, loading: false });
+      }
+      if (a == null && this.state.wasLoggedIn == false) {
+        console.log("USER NOT LOGGED IN AT ALL!");
         firebase
           .auth()
-          .signInAnonymously()
-          .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
+          .setPersistence(firebase2.auth.Auth.Persistence.LOCAL)
+          .then(() => {
+            firebase
+              .auth()
+              .signInAnonymously()
+              .catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // ...
+              });
           });
-      });
+      }
+    });
+  }
+
+  signInWithGoogle() {
+    console.log("sign in");
+
+    var provider = new firebase2.auth.GoogleAuthProvider();
+    this.setState({ loading: true }, () => {
+      firebase
+        .auth()
+        .signInWithPopup(provider)
+        .then(function(result) {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          console.log(result);
+          // ...
+        })
+        .catch(function(error) {
+          console.log(error);
+          // Handle Errors here.
+          this.setState({ loading: false });
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // The email of the user's account used.
+          var email = error.email;
+          // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential;
+          // ...
+        });
+    });
   }
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       window.scrollTo(0, 0);
     }
+  }
+  componentWillUnmount() {
+    this.props.userUnsubscribe();
   }
 
   render() {
@@ -72,6 +116,7 @@ class AppContainer extends Component {
     return (
       <div styleName={"main"}>
         <Header />
+
         {this.state.loggedIn ? (
           <Switch>
             <Route exact path={"/"}>
@@ -111,8 +156,19 @@ class AppContainer extends Component {
               <NewProject />
             </Route>
           </Switch>
-        ) : (
+        ) : !this.state.wasLoggedIn ? (
           <Loading />
+        ) : (
+          <Wrapper>
+            <div style={{ height: 4 }} />
+            <BigButton
+              onClick={() => {
+                this.signInWithGoogle();
+              }}
+            >
+              Log in with google
+            </BigButton>
+          </Wrapper>
         )}
       </div>
     );

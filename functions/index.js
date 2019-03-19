@@ -167,7 +167,10 @@ exports.run = functions.https.onRequest((request, response) => {
               if (cb) {
                 cb.call(null, false);
               } else {
-                response.json({ status: "error", text: "Illegal bucket" });
+                response.json({
+                  status: "error",
+                  data: { text: "Illegal bucket" }
+                });
               }
               return;
             }
@@ -239,7 +242,7 @@ exports.run = functions.https.onRequest((request, response) => {
                       } else {
                         response.json({
                           status: "error",
-                          text: "Couldn't get items."
+                          data: { text: "Couldn't get items." }
                         });
                       }
                     });
@@ -250,7 +253,7 @@ exports.run = functions.https.onRequest((request, response) => {
                   } else {
                     response.json({
                       status: "error",
-                      text: "Problem with pageToken"
+                      data: { text: "Problem with pageToken" }
                     });
                   }
                 });
@@ -265,7 +268,7 @@ exports.run = functions.https.onRequest((request, response) => {
                   } else {
                     response.json({
                       status: "error",
-                      text: "Couldn't get items."
+                      data: { text: "Couldn't get items." }
                     });
                   }
                 });
@@ -278,7 +281,10 @@ exports.run = functions.https.onRequest((request, response) => {
               if (cb) {
                 cb.call(null, false);
               } else {
-                response.json({ status: "error", text: "Illegal bucket" });
+                response.json({
+                  status: "error",
+                  data: { text: "Illegal bucket" }
+                });
               }
               return;
             }
@@ -303,7 +309,10 @@ exports.run = functions.https.onRequest((request, response) => {
                 if (cb) {
                   cb.call(null, false);
                 } else {
-                  response.json({ status: "error" });
+                  response.json({
+                    status: "error",
+                    data: { text: "Error getting item" }
+                  });
                 }
               });
           },
@@ -314,7 +323,10 @@ exports.run = functions.https.onRequest((request, response) => {
               if (cb) {
                 cb.call(null, false);
               } else {
-                response.json({ status: "error", text: "Illegal bucket" });
+                response.json({
+                  status: "error",
+                  data: { text: "Illegal bucket" }
+                });
               }
               return;
             }
@@ -343,7 +355,10 @@ exports.run = functions.https.onRequest((request, response) => {
                 if (cb) {
                   cb.call(null, false);
                 } else {
-                  response.json({ status: "error", text: "ID taken." });
+                  response.json({
+                    status: "error",
+                    data: { text: "ID Taken." }
+                  });
                 }
               });
           },
@@ -354,7 +369,10 @@ exports.run = functions.https.onRequest((request, response) => {
               if (cb) {
                 cb.call(null, false);
               } else {
-                response.json({ status: "error", text: "Illegal bucket" });
+                response.json({
+                  status: "error",
+                  data: { text: "Illegal bucket" }
+                });
               }
               return;
             }
@@ -380,7 +398,10 @@ exports.run = functions.https.onRequest((request, response) => {
                 if (cb) {
                   cb.call(null, false);
                 } else {
-                  response.json({ status: "error", text: "Error updating." });
+                  response.json({
+                    status: "error",
+                    data: { text: "Error updating item." }
+                  });
                 }
               });
           }
@@ -435,7 +456,7 @@ exports.run = functions.https.onRequest((request, response) => {
         vm.load(funcData.byteCode);
       } catch (e) {
         console.log("caught some.", e);
-        response.json({ status: "error", code: e.toString() });
+        response.json({ status: "error", data: { code: e.toString() } });
       }
     });
   });

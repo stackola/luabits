@@ -24,17 +24,18 @@ class Home extends React.Component {
         <div
           style={{
             textAlign: "center",
-            paddingTop: 4,
-            paddingBottom: 4,
+            paddingTop: 8,
+            paddingBottom: 8,
             color: "red",
             height: "auto",
             fontSize: 16,
-            background: "darkred",
+            fontWeight: "bold",
+            background: "#690000",
             color: "white"
           }}
         >
-          This is a pre-pre-alpha development version. DO NOT USE unless you
-          want everything to break, always.
+          This is a pre-pre-alpha development version. APIs can change without
+          notice, and your data may not persist beyond alpha.
         </div>
         <div styleName="big">
           Luabits.com lets you deploy scalable LUA 5.1 functions to the cloud in
