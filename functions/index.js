@@ -353,6 +353,8 @@ exports.run = functions.https.onRequest((request, response) => {
         },
         res: {
           send: s => {
+            d = JSON.parse(JSON.stringify(d));
+            delete d.__shine;
             response.send(s);
           },
           json: d => {
