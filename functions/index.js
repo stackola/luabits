@@ -394,10 +394,15 @@ exports.run = functions.https.onRequest((request, response) => {
           json: d => {
             d = JSON.parse(JSON.stringify(d));
             delete d.__shine;
-            response.json({ status: "ok", data: d });
+            response.json(d);
           },
           redirect: path => {
             response.redirect(path);
+          },
+          ok: d => {
+            d = JSON.parse(JSON.stringify(d));
+            delete d.__shine;
+            response.json({ status: "ok", data: d });
           },
           error: d => {
             d = JSON.parse(JSON.stringify(d));

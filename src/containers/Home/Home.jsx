@@ -47,7 +47,7 @@ class Home extends React.Component {
         <Example
           noPadding
           name="Hello Cloud!"
-          code={'res.json({dateString = os.date("today is %A, in %B")})'}
+          code={'res.ok({dateString = os.date("today is %A, in %B")})'}
           response={{
             status: "ok",
             data: { dateString: "today is Monday, in March" }

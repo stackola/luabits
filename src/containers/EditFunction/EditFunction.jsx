@@ -13,6 +13,8 @@ import ItemLoader from "../../components/ItemLoader/ItemLoader";
 import { getUID, compileLua, updateFunction } from "../../lib";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
+import { Link } from "react-router-dom";
+
 import { withRouter } from "react-router";
 import firebase from "lib/firebase";
 import Docs from "../../components/Docs/Docs";
@@ -165,6 +167,9 @@ class EditFunction extends React.Component {
         <LogViewer {...{ pid, uid, fid }} />
 
         <Title sub>Available APIs:</Title>
+        <Link to="/docs" styleName="docsLink">
+          View full docs
+        </Link>
         <Docs />
       </Wrapper>
     );

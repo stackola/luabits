@@ -16,7 +16,7 @@ class DocsPage extends React.Component {
   render() {
     return (
       <Wrapper title={"Docs"}>
-        <Docs />
+        <Docs showExamples />
       </Wrapper>
     );
   }

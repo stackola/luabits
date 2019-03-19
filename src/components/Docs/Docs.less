@@ -12,9 +12,14 @@
 .sub {
   margin-bottom: 4px;
   font-weight: bold;
+  margin-top: 12px;
+  font-size: 17px;
   &.big {
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 20px;
+  }
+  &:first-child {
+    margin-top: 0;
   }
 }
 .row {
@@ -24,4 +29,20 @@
 
 .indent {
   margin-left: 12px;
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+
+  > a {
+    color: @text;
+    margin-left: 12px;
+    &.big {
+      font-size: 16px;
+      margin-bottom: 4px;
+      margin-top: 4px;
+      margin-left: 0;
+    }
+  }
 }

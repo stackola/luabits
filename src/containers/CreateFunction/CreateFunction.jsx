@@ -23,7 +23,7 @@ class CreateFunction extends React.Component {
     super(props);
 
     this.state = {
-      code: 'res.json("Hello luabits!")',
+      code: 'res.ok("Hello luabits!")',
       name: "",
       status: "start"
     };
@@ -65,7 +65,7 @@ class CreateFunction extends React.Component {
         1,
         0
       ],
-      constants: ["res", "json", "Hello luabits!"],
+      constants: ["res", "ok", "Hello luabits!"],
       functions: [],
       linePositions: [2, 2, 2, 2, 2],
       locals: [],
@@ -100,6 +100,9 @@ class CreateFunction extends React.Component {
         <BigInput
           placeholder={"function-name"}
           value={this.state.name}
+          onEnterKey={() => {
+            this.send();
+          }}
           onChange={s => {
             this.setState({ name: sanitize(s) });
           }}

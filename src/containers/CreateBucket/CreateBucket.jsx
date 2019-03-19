@@ -45,6 +45,9 @@ class CreateBucket extends React.Component {
         <BigInput
           placeholder={"bucket-name"}
           value={this.state.name}
+          onEnterKey={() => {
+            this.create();
+          }}
           onChange={t => {
             this.setState({ name: sanitize(t) });
           }}

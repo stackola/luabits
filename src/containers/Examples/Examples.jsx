@@ -26,7 +26,7 @@ class Examples extends React.Component {
         <Example
           name="Returning JSON"
           text="Respond with JSON in a standarized way."
-          code={'res.json({dateString = os.date("today is %A, in %B")})'}
+          code={'res.ok({dateString = os.date("today is %A, in %B")})'}
           response={{
             status: "ok",
             data: { dateString: "today is Monday, in March" }
@@ -41,7 +41,7 @@ class Examples extends React.Component {
             "The query parameters are available through the global variable `req.query`\nIn this case we are getting the number parameter from the url multiplying it by 2."
           }
           code={
-            "number = req.query.number -- &number=...\n\nif number then\n  res.json({result = number*2})\nelse\n  -- no number supplied\n  res.error({message = 'No number supplied'})\nend"
+            "number = req.query.number -- &number=...\n\nif number then\n  res.ok({result = number*2})\nelse\n  -- no number supplied\n  res.error({message = 'No number supplied'})\nend"
           }
           response={{ status: "ok", data: { result: 24 } }}
           json
@@ -155,7 +155,7 @@ class Examples extends React.Component {
             }
           }}
           json
-          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=list-example"
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=next-page-example"
         />
       </Wrapper>
     );

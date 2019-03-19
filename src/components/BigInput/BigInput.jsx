@@ -20,6 +20,11 @@ export default class BigInput extends React.Component {
           readOnly={this.props.readOnly}
           styleName="BigInput"
           value={this.props.value}
+          onKeyPress={e => {
+            if (e.key === "Enter") {
+              this.props.onEnterKey();
+            }
+          }}
           onChange={e => {
             this.props.onChange(e.target.value);
           }}

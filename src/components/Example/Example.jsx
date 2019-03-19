@@ -32,9 +32,11 @@ export default class Example extends React.Component {
               ? JSON.stringify(this.props.response, null, 4)
               : this.props.response}
           </div>
-          <a styleName="tryLink" href={this.props.link} target="_blank">
-            Try it
-          </a>
+          {this.props.link && (
+            <a styleName="tryLink" href={this.props.link} target="_blank">
+              Try it
+            </a>
+          )}
         </div>
       </div>
     );
