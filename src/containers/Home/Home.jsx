@@ -20,13 +20,13 @@ class Home extends React.Component {
   render() {
     return (
       <Wrapper>
-        <div styleName="big">
+        <div styleName="big" style={{ color: "red", height: "auto" }}>
           This is a pre-pre-alpha development version. DO NOT USE unless you
           want everything to break, always.
         </div>
         <div styleName="big">
-          Luabits.com lets you deploy scalable LUA functions to the cloud in 3
-          clicks.
+          Luabits.com lets you deploy scalable LUA 5.1 functions to the cloud in
+          3 clicks.
         </div>
 
         <Title sub>Your Projects:</Title>

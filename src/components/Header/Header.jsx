@@ -10,7 +10,7 @@ export default class Header extends React.Component {
             <Link styleName="logo" to={"/"}>
               luabits.com
             </Link>
-            <div>| alpha</div>
+            <div>| pre-pre-alpha</div>
           </div>
           <div styleName="flexSpacer" />
           <div styleName="nav">
