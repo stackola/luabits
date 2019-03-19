@@ -181,7 +181,7 @@ exports.run = functions.https.onRequest((request, response) => {
                 if (cb) {
                   cb.call(null, d);
                 } else {
-                  response.json({ status: "ok", data: d });
+                  response.json({ status: "ok", data: { item: d } });
                 }
               })
               .catch(() => {
@@ -221,7 +221,7 @@ exports.run = functions.https.onRequest((request, response) => {
                 if (cb) {
                   cb.call(null, d);
                 } else {
-                  response.json({ status: "ok", data: d });
+                  response.json({ status: "ok", data: { items: d } });
                 }
               })
               .catch(e => {
@@ -262,7 +262,7 @@ exports.run = functions.https.onRequest((request, response) => {
                 if (cb) {
                   cb.call(null, d);
                 } else {
-                  response.json({ status: "ok", data: d });
+                  response.json({ status: "ok", data: { items: d } });
                 }
               })
               .catch(e => {
@@ -301,7 +301,7 @@ exports.run = functions.https.onRequest((request, response) => {
                   cb.call(null, newEntry.id);
                 } else {
                   console.log("sending default response.");
-                  response.json({ status: "ok", newId: newEntry.id });
+                  response.json({ status: "ok", data: { newId: newEntry.id } });
                 }
               })
               .catch(e => {

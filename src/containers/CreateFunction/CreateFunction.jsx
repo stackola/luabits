@@ -23,7 +23,7 @@ class CreateFunction extends React.Component {
     super(props);
 
     this.state = {
-      code: 'res.send("Hello luabits!")',
+      code: 'res.json("Hello luabits!")',
       name: "",
       status: "start"
     };

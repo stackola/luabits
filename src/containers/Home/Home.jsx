@@ -21,7 +21,11 @@ class Home extends React.Component {
     return (
       <Wrapper>
         <div styleName="big">
-          Luabits.com let's you deploy scalable LUA functions to the cloud in 3
+          This is a pre-pre-alpha development version. DO NOT USE unless you
+          want everything to break, always.
+        </div>
+        <div styleName="big">
+          Luabits.com lets you deploy scalable LUA functions to the cloud in 3
           clicks.
         </div>
 

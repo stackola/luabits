@@ -10,26 +10,32 @@ export default class Example extends React.Component {
     return (
       <div styleName="Example">
         <div styleName="title">{this.props.name}</div>
-        <div>{this.props.text}</div>
-        <CodeMirror
-          styleName={"code"}
-          options={{
-            mode: "lua",
-            theme: "oceanic-next",
-            lineNumbers: true,
-            readOnly: true
-          }}
-          value={this.props.code}
-          onChange={c => {}}
-        />
-        <br />
-        Response:
-        <div styleName="response">
-          {JSON.stringify(this.props.response, null, 4)}
+        <div styleName="rest">
+          <div>{this.props.text}</div>
+          <CodeMirror
+            styleName={
+              "code " + (this.props.extraClass ? this.props.extraClass : "")
+            }
+            options={{
+              mode: "lua",
+              theme: "oceanic-next",
+              lineNumbers: true,
+              readOnly: true
+            }}
+            value={this.props.code}
+            onChange={c => {}}
+          />
+          <br />
+          Response:
+          <div styleName="response">
+            {this.props.json
+              ? JSON.stringify(this.props.response, null, 4)
+              : this.props.response}
+          </div>
+          <a styleName="tryLink" href={this.props.link} target="_blank">
+            Try it
+          </a>
         </div>
-        <a styleName="tryLink" href={this.props.link} target="_blank">
-          Try it
-        </a>
       </div>
     );
   }
