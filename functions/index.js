@@ -158,6 +158,119 @@ exports.run = functions.https.onRequest((request, response) => {
           query: request.query
         },
         db: {
+          list: (bucket, options, cb) => {
+            if (!options) {
+              options = {};
+            }
+            if (!projData.buckets.includes(bucket)) {
+              console.log("illegal bucket");
+              if (cb) {
+                cb.call(null, false);
+              } else {
+                response.json({ status: "error", text: "Illegal bucket" });
+              }
+              return;
+            }
+
+            let pageSize = 10;
+            if (options.pageSize >= 1 && options.pageSize <= 25) {
+              pageSize = options.pageSize;
+            }
+
+            let q = projectRef
+              .collection("buckets")
+              .doc("main")
+              .collection(bucket)
+              .limit(pageSize);
+
+            if (options.order) {
+              q = q.orderBy(options.order[0], options.order[1]);
+            } else {
+              if (options.where) {
+                console.log(options.where);
+                q = q.where(
+                  options.where.__shine.numValues[1],
+                  options.where.__shine.numValues[2],
+                  options.where.__shine.numValues[3]
+                );
+              } else {
+                q = q.orderBy("time", "desc");
+              }
+            }
+
+            let processThat = snap => {
+              let docs = snap.docs;
+              let ret = {};
+              if (docs.length == pageSize) {
+                ret.pageToken = docs[docs.length - 1].id;
+              }
+
+              docs = docs.map(d => {
+                d = d.data();
+                if (d.time) {
+                  d.time = d.time.toDate();
+                }
+                return d;
+              });
+              ret.items = docs;
+              if (cb) {
+                cb.call(null, ret);
+              } else {
+                response.json({ status: "ok", data: ret });
+              }
+            };
+
+            if (options.pageToken) {
+              projectRef
+                .collection("buckets")
+                .doc("main")
+                .collection(bucket)
+                .doc(options.pageToken)
+                .get()
+                .then(pageCursor => {
+                  q.startAfter(pageCursor)
+                    .get()
+                    .then(snap => {
+                      processThat(snap);
+                    })
+                    .catch(() => {
+                      if (cb) {
+                        cb.call(null, false);
+                      } else {
+                        response.json({
+                          status: "error",
+                          text: "Couldn't get items."
+                        });
+                      }
+                    });
+                })
+                .catch(() => {
+                  if (cb) {
+                    cb.call(null, false);
+                  } else {
+                    response.json({
+                      status: "error",
+                      text: "Problem with pageToken"
+                    });
+                  }
+                });
+            } else {
+              q.get()
+                .then(snap => {
+                  processThat(snap);
+                })
+                .catch(() => {
+                  if (cb) {
+                    cb.call(null, false);
+                  } else {
+                    response.json({
+                      status: "error",
+                      text: "Couldn't get items."
+                    });
+                  }
+                });
+            }
+          },
           get: (bucket, id, cb) => {
             //fetch id item from bucket.
             if (!projData.buckets.includes(bucket)) {

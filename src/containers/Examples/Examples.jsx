@@ -93,6 +93,70 @@ class Examples extends React.Component {
           json
           link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=get-from-bucket&todoId=pE12Id3gktT93AqLrTiC"
         />
+        <Example
+          extraClass=""
+          name="Getting a list of items from a bucket."
+          text={
+            "Using db.list, we get the 2 newest todos from our bucket. If neither `where` nor `order` clauses are defined, order defaults to 'newest first'."
+          }
+          code={
+            "db.list('todos',{pageSize=2}) -- default sort is 'newest first'."
+          }
+          response={{
+            status: "ok",
+            data: {
+              pageToken: "o2IrRQO48JfUeHO5AudW",
+              items: [
+                {
+                  id: "TywaXltcmsxqwToj962d",
+                  completed: false,
+                  time: "2019-03-19T17:58:54.809Z",
+                  todo: "Shopping"
+                },
+                {
+                  completed: false,
+                  time: "2019-03-19T17:29:41.604Z",
+                  todo: "Shopping",
+                  id: "o2IrRQO48JfUeHO5AudW"
+                }
+              ]
+            }
+          }}
+          json
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=list-example"
+        />
+        <Example
+          extraClass=""
+          name="Getting the next page."
+          text={
+            "Using the pageToken we received in the previous example, we can fetch the next page."
+          }
+          code={
+            "db.list('todos',{pageSize=2, pageToken='o2IrRQO48JfUeHO5AudW'})"
+          }
+          response={{
+            status: "ok",
+            data: {
+              pageToken: "VlqBjKNGZV14oQxjfkXz",
+              items: [
+                {
+                  time: "2019-03-19T17:26:28.294Z",
+                  todo: "Shopping",
+                  id: "fHAuDyyRsyLMokuJ64Qc",
+                  completed: false
+                },
+                {
+                  completed: false,
+                  time: "2019-03-19T17:14:04.961Z",
+                  todo: "Shopping",
+                  id: "VlqBjKNGZV14oQxjfkXz"
+                }
+              ]
+            }
+          }}
+          json
+          link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=list-example"
+        />
       </Wrapper>
     );
   }
