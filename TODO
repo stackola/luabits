@@ -1,0 +1,32 @@
+auth api
+    auth.createUser(username, secret, callback(token))
+    auth.login(username, secret, callback(token))
+    auth.refresh(username, oldToken, callback(newToken))
+    https://firebase.google.com/docs/auth/admin/create-custom-tokens
+    https://firebase.google.com/docs/auth/admin/manage-users#retrieve_user_data
+    https://firebase.google.com/docs/reference/rest/auth/#section-refresh-token
+
+To authenticate a user:
+either pass in url &token=[...] or send in json {token:"..."}
+verify id token
+retrieve user data
+make user variable available
+
+backend sandbox
+homepage
+docs
+getting started
+templates
+short, sensible urls!
+billing
+my profile?
+
+
+list(bucket, options, callback)
+options:
+{
+    where:["key","operator","needle"]
+    where:["completed","==",true]
+    OR
+    
+}

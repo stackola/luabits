@@ -192,87 +192,6 @@ exports.run = functions.https.onRequest((request, response) => {
                 }
               });
           },
-          list: (bucket, cb) => {
-            //fetch id item from bucket.
-            if (!projData.buckets.includes(bucket)) {
-              console.log("illegal bucket");
-              if (cb) {
-                cb.call(null, false);
-              } else {
-                response.json({ status: "error", text: "Illegal bucket" });
-              }
-              return;
-            }
-            projectRef
-              .collection("buckets")
-              .doc("main")
-              .collection(bucket)
-              .get()
-              .then(res => {
-                console.log(res);
-                let d = res.docs.map(snap => {
-                  let r = snap.data();
-                  if (r.time && r.time.toDate) {
-                    r.time = r.time.toDate();
-                  }
-                  return r;
-                });
-                console.log(d);
-                if (cb) {
-                  cb.call(null, d);
-                } else {
-                  response.json({ status: "ok", data: { items: d } });
-                }
-              })
-              .catch(e => {
-                if (cb) {
-                  cb.call(null, false);
-                } else {
-                  response.json({ status: "error", code: e });
-                }
-              });
-          },
-          findAll: (bucket, nkey, op, nvalue, cb) => {
-            //fetch id item from bucket.
-            if (!projData.buckets.includes(bucket)) {
-              console.log("illegal bucket");
-              if (cb) {
-                cb.call(null, false);
-              } else {
-                response.json({ status: "error", text: "Illegal bucket" });
-              }
-              return;
-            }
-            projectRef
-              .collection("buckets")
-              .doc("main")
-              .collection(bucket)
-              .where(nkey, op, nvalue)
-              .get()
-              .then(res => {
-                console.log(res);
-                let d = res.docs.map(snap => {
-                  let r = snap.data();
-                  if (r.time && r.time.toDate) {
-                    r.time = r.time.toDate();
-                  }
-                  return r;
-                });
-                console.log(d);
-                if (cb) {
-                  cb.call(null, d);
-                } else {
-                  response.json({ status: "ok", data: { items: d } });
-                }
-              })
-              .catch(e => {
-                if (cb) {
-                  cb.call(null, false);
-                } else {
-                  response.json({ status: "error", code: e });
-                }
-              });
-          },
           create: (bucket, data, cb) => {
             console.log("creating-");
             if (!projData.buckets.includes(bucket)) {
@@ -353,8 +272,8 @@ exports.run = functions.https.onRequest((request, response) => {
         },
         res: {
           send: s => {
-            d = JSON.parse(JSON.stringify(d));
-            delete d.__shine;
+            s = JSON.parse(JSON.stringify(s));
+            delete s.__shine;
             response.send(s);
           },
           json: d => {
@@ -403,6 +322,22 @@ exports.run = functions.https.onRequest((request, response) => {
   //fetch correct function.
 });
 
+exports.makeUserTest = functions.https.onRequest((request, response) => {
+  admin
+    .auth()
+    .createUser({
+      uid: "some-uid32",
+      password: "testpw"
+    })
+    .then(function(userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully created new user:", userRecord);
+      response.json(userRecord);
+    })
+    .catch(function(error) {
+      console.log("Error creating new user:", error);
+    });
+});
 exports.updateFunction = functions.https.onCall((data, context) => {
   const uid = context.auth.uid;
   if (!context.auth) {

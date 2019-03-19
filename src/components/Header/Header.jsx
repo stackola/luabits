@@ -17,11 +17,11 @@ export default class Header extends React.Component {
             <Link to="/" styleName="navItem">
               Home
             </Link>
+            <Link to="/projects" styleName="navItem">
+              Your projects
+            </Link>
             <Link to="/getting-started" styleName="navItem">
               Getting started
-            </Link>
-            <Link to="/pricing" styleName="navItem">
-              Pricing
             </Link>
             <Link to="/examples" styleName="navItem">
               Examples

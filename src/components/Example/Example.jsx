@@ -8,8 +8,8 @@ import CodeMirror from "react-codemirror";
 export default class Example extends React.Component {
   render() {
     return (
-      <div styleName="Example">
-        <div styleName="title">{this.props.name}</div>
+      <div styleName={"Example " + (this.props.noPadding ? "noPadding" : "")}>
+        {this.props.name && <div styleName="title">{this.props.name}</div>}
         <div styleName="rest">
           <div>{this.props.text}</div>
           <CodeMirror

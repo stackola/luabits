@@ -45,27 +45,6 @@ export default class Docs extends React.Component {
             db.get( bucket, id, callback( object|false )? ) <br />
             Fetch a single item from the database.
           </div>
-          <br />
-          <div styleName="sub">db.list</div>
-          <div styleName="row">
-            db.list( bucket, callback( [object]|false )? ) <br />
-            Fetch ALL items from the database
-          </div>
-          <br />
-          <div styleName="sub">db.findAll</div>
-          <div styleName="row">
-            db.findAll( bucket, needle_key, operator, neeld_value, callback(
-            [object]|false )? ) <br />
-            Find ALL items in a bucket that match your search.
-            <br />
-            Example:
-            <br />
-            db.findAll( "movies", "genre", "==", "Action" )
-          </div>
-          <div styleName="row">
-            operator can be either &lt;, &lt;=, ==, &gt;, &gt;=, or
-            array_contains
-          </div>
         </div>
         <br />
         <div styleName="section">

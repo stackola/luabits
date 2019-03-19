@@ -27,7 +27,7 @@ export function updateFunction(payload) {
 }
 
 export function compileLua(source) {
-  return axios.post("https://luabits.xyz/", { source: source });
+  return axios.post("https://compile.luabits.com/", { source: source });
 }
 
 export function sanitize(s) {

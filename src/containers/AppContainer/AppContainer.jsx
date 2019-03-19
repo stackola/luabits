@@ -23,6 +23,7 @@ import Pricing from "../Pricing/Pricing";
 import DocsPage from "../DocsPage/DocsPage";
 import Examples from "../Examples/Examples";
 import Loading from "../../components/Loading/Loading";
+import Projects from "../Projects/Projects";
 
 @withRouter
 @connect(
@@ -82,6 +83,9 @@ class AppContainer extends Component {
             </Route>
             <Route exact path={"/examples"}>
               <Examples />
+            </Route>
+            <Route exact path={"/projects"}>
+              <Projects />
             </Route>
             <Route exact path={"/project/view/:id"}>
               <Project />

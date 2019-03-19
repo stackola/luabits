@@ -134,7 +134,7 @@ class EditFunction extends React.Component {
         <div>
           <CopyToClipboard
             text={
-              "https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=" +
+              "https://luabits.com/run?uid=" +
               uid +
               "&pid=" +
               pid +
@@ -148,7 +148,7 @@ class EditFunction extends React.Component {
             styleName="funcLink"
             target={"_blank"}
             href={
-              "https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=" +
+              "https://luabits.com/run?uid=" +
               uid +
               "&pid=" +
               pid +
@@ -156,7 +156,7 @@ class EditFunction extends React.Component {
               fid
             }
           >
-            https://us-central1-luabits-a4c52.cloudfunctions.net/run?uid=
+            https://luabits.com/run?uid=
             {uid}&pid={pid}&func={fid}
           </a>
         </div>
