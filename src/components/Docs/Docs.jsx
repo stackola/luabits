@@ -12,10 +12,10 @@ export default class Docs extends React.Component {
             req
           </a>
           <a href="#req-query" styleName="">
-            req.query( )
+            req.query
           </a>
           <a href="#req-json" styleName="">
-            req.json( )
+            req.json
           </a>
           <a href="#db" styleName="big sub">
             db
@@ -164,11 +164,11 @@ export default class Docs extends React.Component {
                 noPadding
                 name="Example with callback"
                 code={
-                  "todo = req.query.todo\n\nif todo then\n  db.create('todos', {todo = todo, completed = false},\n  	function (newId)\n      res.json({newItemId = newId})\n    end\n  )\nelse\n  res.error({message = 'No todo supplied.'})\nend"
+                  "todo = req.query.todo\n\nif todo then\n  db.create('todos', {todo = todo, completed = false},\n  	function (newItem)\n      res.json({newItemId = newItem.id})\n    end\n  )\nelse\n  res.error({message = 'No todo supplied.'})\nend"
                 }
                 response={{ newItemId: "Q9019kHxmSxf8NIphsAx" }}
                 json
-                link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=create-with-callback&todo=Shopping"
+                link="https://luabits.com/run?uid=g7cJlONn6DfNcM6yXwPKpc1C5ul2&pid=tes&func=examplewith&todo=Shopping"
               />
             </div>
           )}
