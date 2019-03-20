@@ -6,7 +6,7 @@ import { ActionCreators } from "redux/actions";
 import { bindActionCreators } from "redux";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import ItemLoader from "../../components/ItemLoader/ItemLoader";
-import { getUID } from "../../lib";
+import { getUID, hasGoogle } from "../../lib";
 import { withRouter } from "react-router";
 import BigButton from "../../components/BigButton/BigButton";
 import Spacer from "../../components/Spacer/Spacer";
@@ -15,6 +15,7 @@ import Bucket from "../../components/Bucket/Bucket";
 import FuncRow from "../../components/FuncRow/FuncRow";
 import FirebaseTable from "../../components/FirebaseTable/FirebaseTable";
 import Loading from "../../components/Loading/Loading";
+import LinkAccountArea from "../../components/LinkAccountArea/LinkAccountArea";
 
 @connect(
   mapStateToProps,
@@ -29,6 +30,8 @@ class Project extends React.Component {
         {projectData => {
           return (
             <Wrapper title={"Project: " + projectData.name}>
+              {!hasGoogle() && <LinkAccountArea />}
+              <div style={{ height: 8 }} />
               <Title sub>Buckets:</Title>
               <div style={{ height: 8 }} />
               {projectData.buckets &&

@@ -17,7 +17,7 @@ class GettingStarted extends React.Component {
       <Wrapper title={"Getting started"}>
         <div style={{ height: 8 }} />
         <div styleName="mid">
-          Luabits let's you deploy web-scale lua functions to the cloud in 3
+          Luabits lets you deploy web-scale Lua functions to the cloud in 3
           clicks.
           <br />
           How's that for buzzwords.
@@ -26,7 +26,7 @@ class GettingStarted extends React.Component {
         <br />
         <div styleName="big">Functions</div>
         <div styleName="mid">
-          Write and deploy LUA functions, straight to the cloud.
+          Write and deploy Lua functions, straight to the cloud.
           <br />
           Your functions can be called via https, and usually return JSON.
           <br />
@@ -55,7 +55,7 @@ class GettingStarted extends React.Component {
         <div styleName="listItem">
           2. Create 0 or more buckets, depending on your needs.
         </div>
-        <div styleName="listItem">3. Write and deploy your lua function</div>
+        <div styleName="listItem">3. Write and deploy your Lua function</div>
         <br />
         <div styleName="small">
           Note: Project / bucket / function names can only contain lower case

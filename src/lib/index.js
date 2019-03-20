@@ -6,6 +6,10 @@ const sendAddBucket = firebase.functions().httpsCallable("addBucket");
 const sendAddFunction = firebase.functions().httpsCallable("addFunction");
 const sendUpdateFunction = firebase.functions().httpsCallable("updateFunction");
 
+export function isDev() {
+  return process.env.NODE_ENV !== "production";
+}
+
 export function newProject(payload) {
   return sendNewProject(payload);
 }

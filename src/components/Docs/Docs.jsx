@@ -124,7 +124,7 @@ export default class Docs extends React.Component {
           <a name="db-create" />
           <div styleName="sub">db.create( )</div>
           <div styleName="row">
-            db.create( bucket, data, callback( newId )? )
+            db.create( bucket, data, callback( newItem )? )
             <br />
             <br />
             Create a new entry in the database. Make sure you have created the

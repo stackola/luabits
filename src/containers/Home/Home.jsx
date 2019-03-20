@@ -39,7 +39,7 @@ class Home extends React.Component {
           notice, and your data may not persist beyond alpha.
         </div>
         <div styleName="big">
-          Deploy scalable LUA cloud functions in 3 clicks
+          Lua cloud functions and storage in 3 clicks
           <br />
           <div>
             Build a backend for your codepen, your school project, your mobile

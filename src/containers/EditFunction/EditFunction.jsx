@@ -10,7 +10,13 @@ import Spacer from "../../components/Spacer/Spacer";
 import LuaBox from "../../components/LuaBox/LuaBox";
 import BigButton from "../../components/BigButton/BigButton";
 import ItemLoader from "../../components/ItemLoader/ItemLoader";
-import { getUID, compileLua, updateFunction } from "../../lib";
+import {
+  getUID,
+  compileLua,
+  updateFunction,
+  hasGoogle,
+  isDev
+} from "../../lib";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 import { Link } from "react-router-dom";
@@ -21,6 +27,7 @@ import Docs from "../../components/Docs/Docs";
 import Title from "../../components/Title/Title";
 import LogViewer from "../../components/LogViewer/LogViewer";
 import Loading from "../../components/Loading/Loading";
+import LinkAccountArea from "../../components/LinkAccountArea/LinkAccountArea";
 @connect(
   mapStateToProps,
   mapDispatchToProps
@@ -103,11 +110,15 @@ class EditFunction extends React.Component {
     let pid = this.props.match.params.id;
     let uid = getUID();
     let fid = this.props.match.params.fid;
+    let baseUrl = isDev()
+      ? "http://localhost:5001/luabits-a4c52/us-central1/run?uid="
+      : "https://luabits.com/run?uid=";
     if (this.state.loading) {
       return <Loading />;
     }
     return (
       <Wrapper title={"Edit function: " + this.state.name} showBack>
+        {!hasGoogle() && <LinkAccountArea />}
         <div style={{ height: 8 }} />
         <LuaBox
           value={this.state.code}
@@ -136,30 +147,16 @@ class EditFunction extends React.Component {
         <Spacer />
         <div>
           <CopyToClipboard
-            text={
-              "https://luabits.com/run?uid=" +
-              uid +
-              "&pid=" +
-              pid +
-              "&func=" +
-              fid
-            }
+            text={baseUrl + uid + "&pid=" + pid + "&func=" + fid}
           >
             <button styleName="clickToCopy">Click to copy</button>
           </CopyToClipboard>
           <a
             styleName="funcLink"
             target={"_blank"}
-            href={
-              "https://luabits.com/run?uid=" +
-              uid +
-              "&pid=" +
-              pid +
-              "&func=" +
-              fid
-            }
+            href={baseUrl + uid + "&pid=" + pid + "&func=" + fid}
           >
-            https://luabits.com/run?uid=
+            {baseUrl}
             {uid}&pid={pid}&func={fid}
           </a>
         </div>

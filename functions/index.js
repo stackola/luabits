@@ -159,11 +159,12 @@ exports.run = functions.https.onRequest((request, response) => {
           .then(funcObj => {
             let funcData = funcObj.data();
             let projData = projObj.data();
+            //console.log(parseToLua(data));
             console.log(projData.buckets);
             let env = {
               req: {
-                json: data,
-                query: request.query
+                json: parseToLua(data),
+                query: parseToLua(request.query)
               },
               db: {
                 list: (bucket, options, cb) => {
@@ -286,7 +287,7 @@ exports.run = functions.https.onRequest((request, response) => {
                 },
                 get: (bucket, id, cb) => {
                   //fetch id item from bucket.
-                  console.log("get called");
+                  //console.log("get called");
                   if (!projData.buckets.includes(bucket)) {
                     console.log("illegal bucket");
                     if (cb) {
@@ -306,13 +307,13 @@ exports.run = functions.https.onRequest((request, response) => {
                     .doc(id)
                     .get()
                     .then(res => {
-                      console.log("good promise!");
+                      //console.log("good promise!");
                       let d = res.data();
                       if (d.time) {
                         d.time = d.time.toDate();
                       }
                       if (cb) {
-                        console.log(parseToLua(d));
+                        //console.log(parseToLua(d));
                         cb.call(null, parseToLua(d));
                       } else {
                         response.json({ status: "ok", data: { item: d } });
@@ -344,7 +345,7 @@ exports.run = functions.https.onRequest((request, response) => {
                     }
                     return;
                   }
-                  console.log(data);
+                  //console.log(data);
                   data = parseAndReturn(data);
                   data.time = new Date();
                   let newEntry = projectRef
@@ -356,16 +357,16 @@ exports.run = functions.https.onRequest((request, response) => {
                   newEntry
                     .create(data)
                     .then(() => {
-                      console.log("done");
+                      //console.log("done");
                       if (cb) {
-                        cb.call(null, newEntry.id);
+                        cb.call(null, data);
                       } else {
-                        console.log("sending default response.");
+                        //console.log("sending default response.");
                         response.json({ status: "ok", data: { item: data } });
                       }
                     })
                     .catch(e => {
-                      console.log("uff", e);
+                      //console.log("uff", e);
                       if (cb) {
                         cb.call(null, false);
                       } else {
@@ -377,9 +378,9 @@ exports.run = functions.https.onRequest((request, response) => {
                     });
                 },
                 update: (bucket, id, data, cb) => {
-                  console.log("updating-");
+                  //console.log("updating-");
                   if (!projData.buckets.includes(bucket)) {
-                    console.log("illegal bucket");
+                    //console.log("illegal bucket");
                     if (cb) {
                       cb.call(null, false);
                     } else {
@@ -398,11 +399,11 @@ exports.run = functions.https.onRequest((request, response) => {
                     .doc(id)
                     .update(data)
                     .then(() => {
-                      console.log("done");
+                      //console.log("done");
                       if (cb) {
-                        cb.call(null, newEntry.id);
+                        cb.call(null, true);
                       } else {
-                        console.log("sending default response.");
+                        //console.log("sending default response.");
                         response.json({ status: "ok" });
                       }
                     })
@@ -421,8 +422,8 @@ exports.run = functions.https.onRequest((request, response) => {
               },
               res: {
                 send: d => {
-                  console.log(d, "!!");
-                  d = parseAndReturn(d);
+                  //console.log(d, "!!");
+                  //d = parseAndReturn(d);
 
                   response.send(d);
                 },
@@ -558,7 +559,11 @@ function identify(elem) {
     if (Object.keys(elem).length > 1 && elem.__shine) {
       return "luaobject";
     }
-    if (elem.__shine.numValues.length > 1) {
+    if (
+      elem.__shine &&
+      elem.__shine.numValues &&
+      elem.__shine.numValues.length > 1
+    ) {
       return "luaarray";
     }
   }
@@ -584,6 +589,9 @@ function parseAndReturn(elem) {
     return elem;
   }
   if (identify(elem) == "object") {
+    if (Object.keys(elem).length == 0) {
+      return {};
+    }
     let tmp = {};
     Object.keys(elem).map(k => {
       let v = elem[k];
@@ -617,11 +625,12 @@ function parseAndReturn(elem) {
     return tmp;
   }
 
-  return "cant parse this";
+  //console.log(elem);
+  return {};
 }
 
 function parseToLua(elem) {
-  console.log("parsing " + elem);
+  //console.log("parsing " + elem);
   if (typeof elem == "undefined") {
     return undefined;
   }
@@ -654,5 +663,6 @@ function parseToLua(elem) {
     );
     return tmp;
   }
-  return "cant parse this";
+  //console.log(elem);
+  return {};
 }
