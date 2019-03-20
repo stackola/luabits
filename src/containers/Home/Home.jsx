@@ -24,6 +24,7 @@ class Home extends React.Component {
         <div
           style={{
             textAlign: "center",
+            padding: 12,
             paddingTop: 8,
             paddingBottom: 8,
             color: "red",
