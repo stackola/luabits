@@ -51,8 +51,8 @@ class Home extends React.Component {
           Click here to get started
         </BigButton>
         <div style={{ height: 24 }} />
-        <div style={{ textAlign: "center", fontSize: 16 }}>
-          or check out these examples
+        <div style={{ textAlign: "center", fontSize: 16, fontWeight: "bold" }}>
+          ...or check out these examples:
         </div>
         <div style={{ height: 24 }} />
         <Example
@@ -117,7 +117,6 @@ class Home extends React.Component {
         <BigButton route={"/examples"}>View more examples</BigButton>
         <div style={{ height: 12 }} />
         <BigButton route={"/getting-started"}>Getting started</BigButton>
-        <div style={{ height: 40 }} />
       </Wrapper>
     );
   }

@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import Wrapper from "../../components/Wrapper/Wrapper";
 import Example from "../../components/Example/Example";
+import BigButton from "../../components/BigButton/BigButton";
 
 @connect(
   mapStateToProps,
@@ -158,6 +159,8 @@ class Examples extends React.Component {
           json
           link="https://luabits.com/run?uid=PFVYvJMugsVndmMtcSWj3Rlo2Tz2&pid=examples&func=next-page-example"
         />
+
+        <BigButton>Check out the docs for even more examples.</BigButton>
       </Wrapper>
     );
   }
