@@ -33,7 +33,12 @@ export default class Example extends React.Component {
               : this.props.response}
           </div>
           {this.props.link && (
-            <a styleName="tryLink" href={this.props.link} target="_blank">
+            <a
+              styleName="tryLink"
+              rel="nofollow"
+              href={this.props.link}
+              target="_blank"
+            >
               Try it
             </a>
           )}
