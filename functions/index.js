@@ -165,6 +165,8 @@ exports.run = functions.https.onRequest((request, response) => {
             list: (bucket, options, cb) => {
               if (!options) {
                 options = {};
+              } else {
+                options = parseAndReturn(options);
               }
               if (!projData.buckets.includes(bucket)) {
                 console.log("illegal bucket");
@@ -334,15 +336,15 @@ exports.run = functions.https.onRequest((request, response) => {
                 }
                 return;
               }
-              data = JSON.parse(JSON.stringify(data));
-              delete data.__shine;
+              console.log(data);
+              data = parseAndReturn(JSON.parse(JSON.stringify(data)));
+              data.time = new Date();
               let newEntry = projectRef
                 .collection("buckets")
                 .doc("main")
                 .collection(bucket)
                 .doc();
               data.id = newEntry.id;
-              data.time = new Date();
               newEntry
                 .create(data)
                 .then(() => {
@@ -361,7 +363,7 @@ exports.run = functions.https.onRequest((request, response) => {
                   } else {
                     response.json({
                       status: "error",
-                      data: { text: "ID Taken." }
+                      data: { e }
                     });
                   }
                 });
@@ -380,8 +382,7 @@ exports.run = functions.https.onRequest((request, response) => {
                 }
                 return;
               }
-              data = JSON.parse(JSON.stringify(data));
-              delete data.__shine;
+              data = parseAndReturn(JSON.parse(JSON.stringify(data)));
               projectRef
                 .collection("buckets")
                 .doc("main")
@@ -412,32 +413,30 @@ exports.run = functions.https.onRequest((request, response) => {
           },
           res: {
             send: s => {
-              s = JSON.parse(JSON.stringify(s));
-              delete s.__shine;
+              d = parseAndReturn(JSON.parse(JSON.stringify(d)));
               response.send(s);
             },
             json: d => {
-              d = JSON.parse(JSON.stringify(d));
-              delete d.__shine;
+              d = parseAndReturn(JSON.parse(JSON.stringify(d)));
               response.json(d);
             },
             redirect: path => {
               response.redirect(path);
             },
             ok: d => {
-              d = JSON.parse(JSON.stringify(d));
-              delete d.__shine;
+              d = parseAndReturn(JSON.parse(JSON.stringify(d)));
               response.json({ status: "ok", data: d });
             },
             error: d => {
-              d = JSON.parse(JSON.stringify(d));
-              delete d.__shine;
+              d = parseAndReturn(JSON.parse(JSON.stringify(d)));
               response.json({ status: "error", data: d });
             }
           },
           utils: {
             log: (message, cb) => {
               //save log entry for function to db.
+
+              message = parseAndReturn(JSON.parse(JSON.stringify(message)));
               let logEntry = funcRef.collection("logs").doc();
               logEntry
                 .set({
@@ -521,4 +520,75 @@ function sanitize(s) {
     .toLowerCase()
     .replace(/ /g, "-")
     .replace(/[^a-z0-9\-]/gi, "");
+}
+
+function identify(elem) {
+  if (typeof elem === "string") {
+    return "string";
+  }
+  if (typeof elem === "boolean") {
+    return "boolean";
+  }
+  if (typeof elem === "number") {
+    return "number";
+  }
+  if (typeof elem === "object") {
+    if (Array.isArray(elem)) {
+      return "array";
+    }
+    if (Object.keys(elem).length > 0 && !elem.__shine) {
+      return "object";
+    }
+    if (Object.keys(elem).length > 1 && elem.__shine) {
+      return "luaobject";
+    }
+    if (elem.__shine.numValues.length > 1) {
+      return "luaarray";
+    }
+  }
+
+  return "neither";
+}
+
+function parseAndReturn(elem) {
+  if (identify(elem) == "number") {
+    return elem;
+  }
+  if (identify(elem) == "string") {
+    return elem;
+  }
+  if (identify(elem) == "boolean") {
+    return elem;
+  }
+  if (identify(elem) == "object") {
+    let tmp = {};
+    Object.keys(elem).map(k => {
+      let v = elem[k];
+      tmp[k] = parseAndReturn(v);
+    });
+    return tmp;
+  }
+  if (identify(elem) == "array") {
+    let tmp = elem.map(v => {
+      return parseAndReturn(v);
+    });
+    return tmp;
+  }
+  if (identify(elem) == "luaobject") {
+    let tmp = JSON.parse(JSON.stringify(elem));
+    delete tmp.__shine;
+    Object.keys(tmp).map(k => {
+      let v = tmp[k];
+      tmp[k] = parseAndReturn(v);
+    });
+    return tmp;
+  }
+  if (identify(elem) == "luaarray") {
+    let tmp = elem.__shine.numValues.slice(1).map(v => {
+      return parseAndReturn(v);
+    });
+    return tmp;
+  }
+
+  return "CANT PARSE THIS";
 }
