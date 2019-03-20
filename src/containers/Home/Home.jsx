@@ -42,7 +42,7 @@ class Home extends React.Component {
           Lua cloud functions and storage in 3 clicks
           <br />
           <div>
-            Build a backend for your codepen, your school project, your mobile
+            Build a back end for your codepen, your school project, your mobile
             app, or your IOT device.
           </div>
         </div>

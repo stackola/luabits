@@ -250,7 +250,7 @@ export default class Docs extends React.Component {
               <b>options.pageSize</b> (int between 1 and 25, default: 10)
               <br />
               <b>options.pageToken</b> (string, previously received from the
-              backend. Used for pagination)
+              back end. Used for pagination)
             </div>
             <br />
             <b>Note:</b> You can only supply one of the two following options
