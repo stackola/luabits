@@ -6,6 +6,7 @@ import { ActionCreators } from "redux/actions";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router";
 import Wrapper from "../../components/Wrapper/Wrapper";
+import BigButton from "../../components/BigButton/BigButton";
 
 @connect(
   mapStateToProps,
@@ -61,6 +62,10 @@ class GettingStarted extends React.Component {
           Note: Project / bucket / function names can only contain lower case
           letters and '-'
         </div>
+        <div style={{ height: 24 }} />
+        <BigButton big route={"/project/create"}>
+          Create your first project!
+        </BigButton>
       </Wrapper>
     );
   }

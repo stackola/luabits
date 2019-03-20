@@ -1,0 +1,12 @@
+Hi HN!
+
+I wanted to share with you my side project in it's aplha stage. I'm calling it luabits.com
+
+Luabits lets you create and deploy cloud functions written in Lua, directly from your browser.
+
+Codepen, Codesandbox and the likes have made it increasingly easy to quickly prototype entire web apps in your browser. One component that's missing from that is a back end. Yes, you could set up a Firebase, but that's not as quick and frictionless as, for example, codepen.
+
+To fill this need, I created Luabits.com. Lua bits are small scripts of Lua which are accesible via HTTPS.
+These scripts have access to buckets, a nosql datastore build on top of Cloud Firestore.
+
+Other usecases include protoypes, MVPs, low volume side projects, personal IOT devices, and anything else that can make use of https.
