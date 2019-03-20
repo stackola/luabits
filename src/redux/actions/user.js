@@ -14,13 +14,13 @@ export function setUserObject(user) {
 export function userSubscribe(cb) {
   let uid = firebase.auth().currentUser.uid;
   return (dispatch, getState) => {
-    console.log("Now subbing to ", uid);
+    //console.log("Now subbing to ", uid);
     unsubUserIntern = firebase
       .firestore()
       .collection("users")
       .doc(uid)
       .onSnapshot(doc => {
-        console.log(doc);
+        //console.log(doc);
         if (!doc.exists) {
           dispatch(setUserObject({}));
         } else {

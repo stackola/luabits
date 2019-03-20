@@ -16,6 +16,7 @@ class Examples extends React.Component {
   render() {
     return (
       <Wrapper title={"Examples"}>
+        <div style={{ height: 8 }} />
         <Example
           name="Hello cloud!"
           text="The simplest cloud function you could write."

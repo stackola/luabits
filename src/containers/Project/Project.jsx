@@ -30,6 +30,7 @@ class Project extends React.Component {
           return (
             <Wrapper title={"Project: " + projectData.name}>
               <Title sub>Buckets:</Title>
+              <div style={{ height: 8 }} />
               {projectData.buckets &&
                 projectData.buckets.map(b => {
                   return (
@@ -43,6 +44,7 @@ class Project extends React.Component {
               </BigButton>
               <Spacer />
               <Title sub>Functions:</Title>
+              <div style={{ height: 8 }} />
               <FirebaseTable
                 hideEmpty
                 pageSize={10}

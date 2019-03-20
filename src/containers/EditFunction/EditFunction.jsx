@@ -38,7 +38,7 @@ class EditFunction extends React.Component {
   }
   updateCode(code) {
     this.setState({ code: code }, () => {
-      console.log(this.state);
+      //console.log(this.state);
     });
   }
   send() {
@@ -46,9 +46,9 @@ class EditFunction extends React.Component {
     this.setState({ status: "compiling" }, () => {
       compileLua(this.state.code).then(r => {
         if (r.data.status && r.data.status == "ok") {
-          console.log("ok");
+          //console.log("ok");
           let byteCode = r.data.bytecode;
-          console.log(JSON.stringify(byteCode));
+          //console.log(JSON.stringify(byteCode));
           this.setState({ status: "saving" }, () => {
             updateFunction({
               pid: pid,
@@ -84,13 +84,13 @@ class EditFunction extends React.Component {
     let pid = this.props.match.params.id;
     let uid = getUID();
     let fid = this.props.match.params.fid;
-    console.log("users/" + uid + "/projects/" + pid + "/functions/" + fid);
+    //console.log("users/" + uid + "/projects/" + pid + "/functions/" + fid);
     firebase
       .firestore()
       .doc("users/" + uid + "/projects/" + pid + "/functions/" + fid)
       .get()
       .then(r => {
-        console.log("got func", r.data());
+        //console.log("got func", r.data());
         let d = r.data();
         this.setState({
           name: d.name,
@@ -108,6 +108,7 @@ class EditFunction extends React.Component {
     }
     return (
       <Wrapper title={"Edit function: " + this.state.name} showBack>
+        <div style={{ height: 8 }} />
         <LuaBox
           value={this.state.code}
           onChange={s => {
@@ -167,6 +168,7 @@ class EditFunction extends React.Component {
         <LogViewer {...{ pid, uid, fid }} />
 
         <Title sub>Available APIs:</Title>
+        <div style={{ height: 8 }} />
         <Link to="/docs" styleName="docsLink">
           View full docs
         </Link>

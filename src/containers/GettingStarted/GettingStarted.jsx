@@ -15,6 +15,7 @@ class GettingStarted extends React.Component {
   render() {
     return (
       <Wrapper title={"Getting started"}>
+        <div style={{ height: 8 }} />
         <div styleName="mid">
           Luabits let's you deploy web-scale lua functions to the cloud in 3
           clicks.

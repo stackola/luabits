@@ -26,10 +26,13 @@ class CreateBucket extends React.Component {
     };
   }
   create() {
+    if (this.state.name.trim() == "") {
+      return;
+    }
     let pid = this.props.match.params.id;
     this.setState({ status: "loading" }, () => {
       addBucket({ pid: pid, name: this.state.name }).then(resp => {
-        console.log(resp);
+        //console.log(resp);
         if (resp.data.status !== "ok") {
           console.log("Stuff went wrong.");
           this.setState({ status: "error" });

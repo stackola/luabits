@@ -1,5 +1,4 @@
 import firebase from "lib/firebase";
-import firebase2 from "firebase";
 import axios from "axios";
 
 const sendNewProject = firebase.functions().httpsCallable("newProject");
@@ -38,7 +37,6 @@ export function sanitize(s) {
 }
 
 export function hasGoogle() {
-  console.log(firebase.auth().currentUser);
   let res =
     firebase.auth().currentUser.providerData.map(pd => {
       return pd.providerId == "google.com";

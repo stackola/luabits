@@ -22,7 +22,7 @@ export default class LogViewer extends React.Component {
       "/functions/" +
       this.props.fid +
       "/logs";
-    console.log(path);
+    //console.log(path);
     return (
       <div styleName="LogViewer">
         {!this.state.open && (

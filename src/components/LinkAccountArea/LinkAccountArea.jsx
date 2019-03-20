@@ -6,7 +6,8 @@ import { ActionCreators } from "redux/actions";
 import { bindActionCreators } from "redux";
 
 import firebase from "lib/firebase";
-import firebase2 from "firebase";
+import firebase2 from "firebase/app";
+import "firebase/auth";
 import BigButton from "../BigButton/BigButton";
 
 @connect(
@@ -23,7 +24,7 @@ class LinkAccountArea extends React.Component {
   }
 
   signInWithGoogle() {
-    console.log("sign in");
+    //console.log("sign in");
     var provider = new firebase2.auth.GoogleAuthProvider();
     this.setState({ status: "loading" }, () => {
       firebase

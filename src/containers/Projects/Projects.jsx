@@ -21,6 +21,7 @@ class Projects extends React.Component {
     return (
       <Wrapper title={"Your projects"}>
         {!hasGoogle() && <LinkAccountArea />}
+        <div style={{ height: 8 }} />
         <FirebaseTable
           pageSize={5}
           path={"users/" + getUID() + "/projects"}

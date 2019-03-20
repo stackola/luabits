@@ -6,7 +6,8 @@ import { bindActionCreators } from "redux";
 import style from "./AppContainer.less";
 
 import firebase from "lib/firebase";
-import firebase2 from "firebase";
+import firebase2 from "firebase/app";
+import "firebase/auth";
 
 import { Route, Link, withRouter, Switch, Redirect } from "react-router-dom";
 import Header from "../../components/Header/Header";
@@ -26,6 +27,7 @@ import Loading from "../../components/Loading/Loading";
 import Projects from "../Projects/Projects";
 import { getUID } from "../../lib";
 import BigButton from "../../components/BigButton/BigButton";
+import Footer from "../../components/Footer/Footer";
 
 @withRouter
 @connect(
@@ -44,7 +46,7 @@ class AppContainer extends Component {
 
   componentDidMount() {
     firebase.auth().onAuthStateChanged(a => {
-      console.log("THAT CHANGE!", a);
+      //console.log("THAT CHANGE!", a);
       if (a && a.uid) {
         this.setState({ loggedIn: true, wasLoggedIn: true });
         this.props.userSubscribe();
@@ -53,7 +55,7 @@ class AppContainer extends Component {
         this.setState({ loggedIn: false, loading: false });
       }
       if (a == null && this.state.wasLoggedIn == false) {
-        console.log("USER NOT LOGGED IN AT ALL!");
+        //console.log("USER NOT LOGGED IN AT ALL!");
         firebase
           .auth()
           .setPersistence(firebase2.auth.Auth.Persistence.LOCAL)
@@ -73,7 +75,7 @@ class AppContainer extends Component {
   }
 
   signInWithGoogle() {
-    console.log("sign in");
+    //console.log("sign in");
 
     var provider = new firebase2.auth.GoogleAuthProvider();
     this.setState({ loading: true }, () => {
@@ -112,7 +114,6 @@ class AppContainer extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div styleName={"main"}>
         <Header />
@@ -170,6 +171,7 @@ class AppContainer extends Component {
             </BigButton>
           </Wrapper>
         )}
+        <Footer />
       </div>
     );
   }

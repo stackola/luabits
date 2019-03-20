@@ -43,7 +43,7 @@ export default class FirebaseTable extends React.Component {
       let tmpItems = [];
       snap.forEach(doc => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        //console.log(doc.id, " => ", doc.data());
         tmpItems.push(doc);
       });
       this.setState(
@@ -53,7 +53,7 @@ export default class FirebaseTable extends React.Component {
           hasMore: tmpItems.length == pageSize
         },
         () => {
-          console.log(this.state);
+          //console.log(this.state);
         }
       );
     });

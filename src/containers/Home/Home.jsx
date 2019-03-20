@@ -34,17 +34,21 @@ class Home extends React.Component {
             color: "white"
           }}
         >
-          This is a pre-pre-alpha development version. APIs can change without
+          This is a pre-alpha development version. APIs can change without
           notice, and your data may not persist beyond alpha.
         </div>
         <div styleName="big">
-          Luabits.com lets you deploy scalable LUA 5.1 functions to the cloud in
-          3 clicks.
+          Deploy scalable LUA cloud functions in 3 clicks
           <br />
-          <br />
-          Build a backend for your codepen, your school project, your mobile
-          app, or your IOT device.
+          <div>
+            Build a backend for your codepen, your school project, your mobile
+            app, or your IOT device.
+          </div>
         </div>
+        <BigButton route={"/project/create"}>
+          Click here to get started
+        </BigButton>
+        <div style={{ height: 24 }} />
         <Example
           noPadding
           name="Hello Cloud!"

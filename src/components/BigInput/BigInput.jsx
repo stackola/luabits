@@ -10,7 +10,7 @@ export default class BigInput extends React.Component {
 
   render() {
     return (
-      <>
+      <div styleName="outer">
         <div styleName="label">{this.props.label}</div>
         <input
           ref={ref => {
@@ -29,7 +29,7 @@ export default class BigInput extends React.Component {
             this.props.onChange(e.target.value);
           }}
         />
-      </>
+      </div>
     );
   }
 }

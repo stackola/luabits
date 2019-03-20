@@ -30,10 +30,13 @@ class CreateFunction extends React.Component {
   }
   updateCode(code) {
     this.setState({ code: code }, () => {
-      console.log(this.state);
+      //console.log(this.state);
     });
   }
   send() {
+    if (this.state.name.trim() == "") {
+      return;
+    }
     let pid = this.props.match.params.id;
     let byteCode = {
       sourceName: "@lua/9ed776b0-48fc-11e9-b866-d5df7d24f98e.lua",
@@ -80,7 +83,7 @@ class CreateFunction extends React.Component {
         byteCode: byteCode
       })
         .then(resp => {
-          console.log(resp);
+          //console.log(resp);
           if (resp.data.newFunction) {
             this.props.history.push(
               "/project/view/" + pid + "/editFunction/" + resp.data.newFunction

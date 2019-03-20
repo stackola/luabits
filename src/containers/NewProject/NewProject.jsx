@@ -26,11 +26,14 @@ class NewProject extends React.Component {
   }
 
   create() {
+    if (this.state.name.trim() == "") {
+      return;
+    }
     this.setState({ status: "loading" }, () => {
       newProject({ name: this.state.name }).then(resp => {
-        console.log(resp);
+        //console.log(resp);
         if (resp.data.status !== "ok") {
-          console.log("Stuff went wrong.");
+          //console.log("Stuff went wrong.");
 
           this.setState({ status: "error" });
           return;

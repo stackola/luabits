@@ -9,6 +9,7 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "faker": "^4.1.0",
     "firebase-admin": "^7.0.0",
     "firebase-functions": "^2.2.0"

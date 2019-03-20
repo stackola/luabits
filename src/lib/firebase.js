@@ -1,6 +1,7 @@
 // Config file
-import * as firebase from "firebase";
-
+import firebase from "firebase/app";
+import "firebase/functions";
+import "firebase/firestore";
 var config = {
   apiKey: "AIzaSyCZ1lIT4TLykoaSYLHx_jrhllxewX2MNQI",
   authDomain: "luabits-a4c52.firebaseapp.com",
