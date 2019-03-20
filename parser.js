@@ -163,3 +163,51 @@ function parseAndReturn(elem) {
 
   return "CANT PARSE THIS";
 }
+
+function parseToLua(elem) {
+  if (typeof elem == "undefined") {
+    return undefined;
+  }
+  elem = JSON.parse(JSON.stringify(elem));
+  if (identify(elem) == "number") {
+    return elem;
+  }
+  if (identify(elem) == "string") {
+    return elem;
+  }
+  if (identify(elem) == "boolean") {
+    return elem;
+  }
+  if (identify(elem) == "object") {
+    let tmp = {};
+    Object.keys(elem).map(k => {
+      let v = elem[k];
+      tmp[k] = parseToLua(v);
+    });
+    return tmp;
+  }
+  if (identify(elem) == "array") {
+    let tmp = [null].concat(
+      elem.map(v => {
+        return parseToLua(v);
+      })
+    );
+    return tmp;
+  }
+  return "cant parse this";
+}
+
+console.log(
+  JSON.stringify(
+    parseToLua({
+      status: "ok",
+      data: {
+        item: {
+          time: "2019-03-20T02:59:54.579Z",
+          id: "ROl6wJUAL8b6LvB5zMoq",
+          arr: ["first", "second"]
+        }
+      }
+    })
+  )
+);
