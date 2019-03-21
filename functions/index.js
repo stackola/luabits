@@ -15,8 +15,47 @@ const cors = require("cors")({
 //  response.send("Hello from Firebase!");
 // });
 
-exports.exec = functions.https.onRequest((request, response) => {
-  response.send("Hello from Firebase!!");
+exports.getPublicFunction = functions.https.onCall((data, context) => {
+  let uid = data.uid;
+  let pid = data.pid;
+  let fid = data.fid;
+  let projectRef = db
+    .collection("users")
+    .doc(uid)
+    .collection("projects")
+    .doc(pid);
+  let funcRef = projectRef.collection("functions").doc(fid);
+
+  return projectRef.get().then(pSnap => {
+    let pData = pSnap.data();
+    return funcRef.get().then(fSnap => {
+      let fData = fSnap.data();
+      if (pData && fData && (fData.public || pData.public)) {
+        return { status: "ok", func: fData, proj: pData };
+      } else {
+        return { status: "error", text: "Function not found or not public." };
+      }
+    });
+  });
+});
+
+exports.getPublicProject = functions.https.onCall((data, context) => {
+  let uid = data.uid;
+  let pid = data.pid;
+  let projectRef = db
+    .collection("users")
+    .doc(uid)
+    .collection("projects")
+    .doc(pid);
+
+  return projectRef.get().then(pSnap => {
+    let pData = pSnap.data();
+    if (pData && pData.public) {
+      return { status: "ok", proj: pData };
+    } else {
+      return { status: "error", text: "Project not found or not public." };
+    }
+  });
 });
 
 let defaultBalance = 10000;

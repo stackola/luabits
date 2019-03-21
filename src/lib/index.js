@@ -6,6 +6,17 @@ const sendAddBucket = firebase.functions().httpsCallable("addBucket");
 const sendAddFunction = firebase.functions().httpsCallable("addFunction");
 const sendUpdateFunction = firebase.functions().httpsCallable("updateFunction");
 
+const getPubFunc = firebase.functions().httpsCallable("getPublicFunction");
+const getPubProj = firebase.functions().httpsCallable("getPublicProject");
+
+export function getPublicFunction(payload) {
+  return getPubFunc(payload);
+}
+
+export function getPublicProject(payload) {
+  return getPubProj(payload);
+}
+
 export function isDev() {
   return process.env.NODE_ENV !== "production";
 }
