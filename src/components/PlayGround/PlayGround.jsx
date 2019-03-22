@@ -13,14 +13,20 @@ export default class PlayGround extends React.Component {
 
     this.state = {
       extraUrl: "",
-      reqLoading: false,
-      extraJson: ""
+      extraJson: "",
+      status: "start"
     };
   }
   validateAndFormatJson() {
-    this.setState({
-      extraJson: JSON.stringify(JSON.parse(this.state.extraJson), null, 4)
-    });
+    let d;
+    try {
+      d = JSON.parse(this.state.extraJson);
+      this.setState({
+        extraJson: JSON.stringify(d, null, 4)
+      });
+    } catch (e) {
+      console.log("That aint json.");
+    }
   }
   sendRequest() {
     let uid = this.props.uid;
@@ -28,23 +34,44 @@ export default class PlayGround extends React.Component {
     let fid = this.props.fid;
     let url = baseUrl + uid + "&pid=" + pid + "&func=" + fid;
     if (this.state.extraUrl) {
-      url += "&" + this.state.extraJson;
+      url += "&" + this.state.extraUrl;
     }
-    this.setState({ reqLoading: true, response: "" }, () => {
-      if (this.state.extraJson) {
-        axios.post(url, JSON.parse(this.state.extraJson)).then(r => {
-          this.processResponse(r);
+
+    if (this.state.extraJson) {
+      let d;
+      try {
+        JSON.parse(this.state.extraJson);
+
+        this.setState({ status: "loading", response: "" }, () => {
+          axios
+            .post(url, d)
+            .then(r => {
+              this.processResponse(r);
+            })
+            .catch(() => {
+              this.setState({ status: "error" });
+            });
         });
-      } else {
-        axios.get(url).then(r => {
-          this.processResponse(r);
-        });
+      } catch (e) {
+        this.setState({ status: "invalidJson" });
+        console.log("invalid json");
       }
-    });
+    } else {
+      this.setState({ status: "loading", response: "" }, () => {
+        axios
+          .get(url)
+          .then(r => {
+            this.processResponse(r);
+          })
+          .catch(() => {
+            this.setState({ status: "error" });
+          });
+      });
+    }
   }
   processResponse(r) {
     console.log("got resp from func", r);
-    this.setState({ response: r.data, reqLoading: false });
+    this.setState({ response: r.data, status: "done" });
   }
   render() {
     let uid = this.props.uid;
@@ -78,12 +105,17 @@ export default class PlayGround extends React.Component {
         />
         <div style={{ height: 8 }} />
         <BigButton
-          loading={this.state.reqLoading}
+          loading={this.state.status == "loading"}
           onClick={() => {
             this.sendRequest();
           }}
         >
-          Send request
+          {this.state.status == "start" && "Send request"}
+          {this.state.status == "invalidJson" &&
+            "Invalid JSON. Click to try again."}
+
+          {this.state.status == "error" && "Error occured. Click to try again."}
+          {this.state.status == "done" && "Done!"}
         </BigButton>
         <div style={{ height: 12 }} />
         Response:
