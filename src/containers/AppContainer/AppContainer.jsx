@@ -28,6 +28,7 @@ import Projects from "../Projects/Projects";
 import { getUID } from "../../lib";
 import BigButton from "../../components/BigButton/BigButton";
 import Footer from "../../components/Footer/Footer";
+import ViewFunction from "../ViewFunction/ViewFunction";
 
 @withRouter
 @connect(
@@ -137,6 +138,9 @@ class AppContainer extends Component {
             </Route>
             <Route exact path={"/projects"}>
               <Projects />
+            </Route>
+            <Route exact path={"/share/:uid/:pid/:fid"}>
+              <ViewFunction />
             </Route>
             <Route exact path={"/project/view/:id"}>
               <Project />

@@ -28,6 +28,8 @@ import Title from "../../components/Title/Title";
 import LogViewer from "../../components/LogViewer/LogViewer";
 import Loading from "../../components/Loading/Loading";
 import LinkAccountArea from "../../components/LinkAccountArea/LinkAccountArea";
+import PlayGround from "../../components/PlayGround/PlayGround";
+import AnimateHeight from "react-animate-height";
 @connect(
   mapStateToProps,
   mapDispatchToProps
@@ -102,7 +104,8 @@ class EditFunction extends React.Component {
         this.setState({
           name: d.name,
           code: d.source,
-          loading: false
+          loading: false,
+          showPlay: false
         });
       });
   }
@@ -163,6 +166,17 @@ class EditFunction extends React.Component {
         <div />
         <Spacer />
         <LogViewer {...{ pid, uid, fid }} />
+        <AnimateHeight height={this.state.showPlay ? "auto" : 0}>
+          <PlayGround {...{ pid, uid, fid }} />
+        </AnimateHeight>
+        <div style={{ height: 8 }} />
+        <BigButton
+          onClick={() => {
+            this.setState({ showPlay: !this.state.showPlay });
+          }}
+        >
+          {this.state.showPlay ? "Hide" : "Show"} playground
+        </BigButton>
 
         <Title sub>Available APIs:</Title>
         <div style={{ height: 8 }} />

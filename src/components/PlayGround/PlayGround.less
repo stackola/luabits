@@ -1,0 +1,42 @@
+@import "../../less/variables.less";
+
+.PlayGround {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.inputs {
+  display: flex;
+  font-size: 18px;
+  padding: 4px;
+  align-items: center;
+  color: #999;
+  font-weight: bold;
+  background: darken(@background, 5%);
+  > input {
+    flex: 1;
+    background: none;
+    border: none;
+    font-weight: 300;
+    font-size: 18px;
+    color: @text;
+    outline: none;
+  }
+}
+
+textarea {
+  padding: 4px;
+  background: white;
+  color: black;
+  outline: none;
+  border: none;
+  height: 200px;
+}
+
+.response {
+  height: 200px;
+  background: white;
+  color: black;
+  padding: 4px;
+}
