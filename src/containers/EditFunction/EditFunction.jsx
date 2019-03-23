@@ -86,6 +86,26 @@ class EditFunction extends React.Component {
       });
     });
   }
+  changePubStatus(val) {
+    let pid = this.props.match.params.id;
+    this.setState({ pubStatus: "loading" }, () => {
+      updateFunction({
+        pid: pid,
+        name: this.state.name,
+        public: val
+      })
+        .then(() => {
+          this.setState({ pubStatus: "done", pubOverride: val });
+          console.log("done that", val);
+        })
+        .catch(e => {
+          this.setState({
+            pubStatus: "error"
+          });
+          console.log("err", e);
+        });
+    });
+  }
   componentDidMount() {
     this.fetch();
   }
@@ -99,10 +119,11 @@ class EditFunction extends React.Component {
       .doc("users/" + uid + "/projects/" + pid + "/functions/" + fid)
       .get()
       .then(r => {
-        //console.log("got func", r.data());
+        console.log("got func", r.data());
         let d = r.data();
         this.setState({
           name: d.name,
+          public: d.public,
           code: d.source,
           loading: false,
           showPlay: false
@@ -120,7 +141,62 @@ class EditFunction extends React.Component {
       return <Loading />;
     }
     return (
-      <Wrapper title={<div>Edit function: {this.state.name}</div>} showBack>
+      <Wrapper
+        title={
+          <>
+            Edit function: {this.state.name}
+            <div style={{ flex: 1 }} />
+            {this.state.pubStatus == "loading" ? (
+              <BigButton slim>
+                <div style={{ width: 8 }} />
+                Loading...
+                <div style={{ width: 8 }} />
+              </BigButton>
+            ) : this.state.pubOverride ||
+              (typeof this.state.pubOverride == "undefined" &&
+                this.state.public) ? (
+              <>
+                <div style={{ fontWeight: "normal", fontSize: 12 }}>
+                  Share URL:
+                </div>
+
+                <div style={{ width: 4, height: 8 }} />
+                <input
+                  styleName={"shareUrl"}
+                  value={
+                    "https://luabits.com/share/" + uid + "/" + pid + "/" + fid
+                  }
+                />
+                <div style={{ height: 8, width: 4 }} />
+                <BigButton
+                  slim
+                  onClick={() => {
+                    this.changePubStatus(false);
+                  }}
+                >
+                  <div style={{ width: 8 }} />
+                  Make private
+                  <div style={{ width: 8 }} />
+                </BigButton>
+                <div style={{ height: 8 }} />
+              </>
+            ) : (
+              <BigButton
+                slim
+                cta
+                onClick={() => {
+                  this.changePubStatus(true);
+                }}
+              >
+                <div style={{ width: 8 }} />
+                Make public
+                <div style={{ width: 8 }} />
+              </BigButton>
+            )}
+          </>
+        }
+        showBack
+      >
         {!hasGoogle() && <LinkAccountArea />}
         <div style={{ height: 8 }} />
         <LuaBox

@@ -9,8 +9,9 @@ export default class BigButton extends React.Component {
         <div
           styleName={
             "BigButton " +
-            (this.props.big ? "big" : "") +
-            (this.props.inline ? "inline" : "")
+            (this.props.big ? "big " : "") +
+            (this.props.slim ? "slim " : "") +
+            (this.props.inline ? "inline " : "")
           }
         >
           <ReactLoading type={"spin"} color={"white"} height={20} width={20} />
@@ -22,9 +23,10 @@ export default class BigButton extends React.Component {
         <Link
           styleName={
             "BigButton " +
-            (this.props.big ? "big" : "") +
-            (this.props.cta ? "cta" : "") +
-            (this.props.inline ? "inline" : "")
+            (this.props.big ? "big " : "") +
+            (this.props.slim ? "slim " : "") +
+            (this.props.cta ? "cta " : "") +
+            (this.props.inline ? "inline " : "")
           }
           to={this.props.route}
         >
@@ -36,9 +38,10 @@ export default class BigButton extends React.Component {
         <div
           styleName={
             "BigButton " +
-            (this.props.big ? "big" : "") +
-            (this.props.cta ? "cta" : "") +
-            (this.props.inline ? "inline" : "")
+            (this.props.big ? "big " : "") +
+            (this.props.slim ? "slim " : "") +
+            (this.props.cta ? "cta " : "") +
+            (this.props.inline ? "inline " : "")
           }
           onClick={() => {
             this.props.onClick && this.props.onClick();

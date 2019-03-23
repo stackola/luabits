@@ -549,20 +549,25 @@ exports.updateFunction = functions.https.onCall((data, context) => {
   //let uid = "10fIQQ4a6sblWn0OEHaYrNd2V2x1";
   //TODO: Check if user can create more.
   let pid = data.pid;
-  let source = data.source;
-  let byteCode = data.byteCode;
-  name = sanitize(data.name);
+  let newData = {
+    pid: pid
+  };
+  if (data.source) {
+    newData.source = data.source;
+  }
+  if (data.byteCode) {
+    newData.byteCode = data.byteCode;
+  }
+  newData.public = data.public || false;
+  let name = sanitize(data.name);
+  newData.time = new Date();
   //create new function.
   let userRef = db.collection("users").doc(uid);
   let projectRef = userRef.collection("projects").doc(pid);
   return projectRef
     .collection("functions")
     .doc(name)
-    .update({
-      source: source,
-      byteCode: byteCode,
-      time: new Date()
-    })
+    .update(newData)
     .then(res => {
       return { status: "ok" };
     })
