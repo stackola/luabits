@@ -30,9 +30,15 @@ class ViewFunction extends React.Component {
     getPublicFunction({ uid, pid, fid })
       .then(data => {
         console.log("Got public function", data);
-        this.setState({ func: data.data.func, proj: data.data.proj });
+        if (data.data.status != "ok") {
+          this.setState({ error: true });
+        } else {
+          this.setState({ func: data.data.func, proj: data.data.proj });
+        }
       })
-      .catch(e => console.log);
+      .catch(e => {
+        this.setState({ error: true });
+      });
   }
 
   render() {
@@ -45,6 +51,8 @@ class ViewFunction extends React.Component {
         <LuaBox value={func.source} onChange={() => {}} readOnly />
         <PlayGround fid={func.name} pid={proj.id} uid={proj.user} />
       </Wrapper>
+    ) : this.state.error ? (
+      <Wrapper title={"Error"}>Function not public.</Wrapper>
     ) : (
       <Loading />
     );
