@@ -120,7 +120,7 @@ class EditFunction extends React.Component {
       return <Loading />;
     }
     return (
-      <Wrapper title={"Edit function: " + this.state.name} showBack>
+      <Wrapper title={<div>Edit function: {this.state.name}</div>} showBack>
         {!hasGoogle() && <LinkAccountArea />}
         <div style={{ height: 8 }} />
         <LuaBox
@@ -130,10 +130,9 @@ class EditFunction extends React.Component {
             this.updateCode(s);
           }}
         />
-
-        <Spacer />
-
+        <div style={{ height: 8 }} />
         <BigButton
+          cta
           loading={
             this.state.status == "compiling" || this.state.status == "saving"
           }
@@ -141,19 +140,24 @@ class EditFunction extends React.Component {
             this.send();
           }}
         >
-          Update
+          Update {this.state.status == "done" && "saved"}
         </BigButton>
         {this.state.status == "error" && (
           <div styleName="error">Error: {this.state.errorText}</div>
         )}
-        {this.state.status == "done" && <div styleName="done">Saved.</div>}
-        <Spacer />
-        <div>
+
+        <div style={{ height: 8 }} />
+        <div style={{ display: "flex", alignItems: "center" }}>
           <CopyToClipboard
             text={baseUrl + uid + "&pid=" + pid + "&func=" + fid}
           >
-            <button styleName="clickToCopy">Click to copy</button>
+            <BigButton inline>
+              <div style={{ width: 8 }} />
+              Click to copy
+              <div style={{ width: 8 }} />
+            </BigButton>
           </CopyToClipboard>
+          <div style={{ width: 8 }} />
           <a
             styleName="funcLink"
             target={"_blank"}
@@ -164,11 +168,8 @@ class EditFunction extends React.Component {
           </a>
         </div>
         <div />
-        <Spacer />
+        <div style={{ height: 8 }} />
         <LogViewer {...{ pid, uid, fid }} />
-        <AnimateHeight height={this.state.showPlay ? "auto" : 0}>
-          <PlayGround {...{ pid, uid, fid }} />
-        </AnimateHeight>
         <div style={{ height: 8 }} />
         <BigButton
           onClick={() => {
@@ -177,12 +178,17 @@ class EditFunction extends React.Component {
         >
           {this.state.showPlay ? "Hide" : "Show"} playground
         </BigButton>
+        <div style={{ height: 8 }} />
+        <AnimateHeight height={this.state.showPlay ? "auto" : 0}>
+          <PlayGround {...{ pid, uid, fid }} />
+        </AnimateHeight>
 
-        <Title sub>Available APIs:</Title>
+        <Title>Available APIs:</Title>
         <div style={{ height: 8 }} />
         <Link to="/docs" styleName="docsLink">
           View full docs
         </Link>
+        <div style={{ height: 24 }} />
         <Docs />
       </Wrapper>
     );

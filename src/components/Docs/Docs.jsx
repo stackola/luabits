@@ -57,7 +57,9 @@ export default class Docs extends React.Component {
             utils.log( )
           </a>
         </div>
-        <div style={{ height: 50 }} />
+        <div style={{ height: 24 }} />
+
+        <Title>Global variables</Title>
         <div styleName="section">
           <a name="req" />
           <div styleName="sub big">req</div>

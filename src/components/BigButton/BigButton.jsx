@@ -6,7 +6,13 @@ export default class BigButton extends React.Component {
   render() {
     if (this.props.loading) {
       return (
-        <div styleName={"BigButton " + (this.props.big ? "big" : "")}>
+        <div
+          styleName={
+            "BigButton " +
+            (this.props.big ? "big" : "") +
+            (this.props.inline ? "inline" : "")
+          }
+        >
           <ReactLoading type={"spin"} color={"white"} height={20} width={20} />
         </div>
       );
@@ -14,7 +20,12 @@ export default class BigButton extends React.Component {
     if (this.props.route) {
       return (
         <Link
-          styleName={"BigButton " + (this.props.big ? "big" : "")}
+          styleName={
+            "BigButton " +
+            (this.props.big ? "big" : "") +
+            (this.props.cta ? "cta" : "") +
+            (this.props.inline ? "inline" : "")
+          }
           to={this.props.route}
         >
           {this.props.children}
@@ -23,7 +34,12 @@ export default class BigButton extends React.Component {
     } else {
       return (
         <div
-          styleName={"BigButton " + (this.props.big ? "big" : "")}
+          styleName={
+            "BigButton " +
+            (this.props.big ? "big" : "") +
+            (this.props.cta ? "cta" : "") +
+            (this.props.inline ? "inline" : "")
+          }
           onClick={() => {
             this.props.onClick && this.props.onClick();
           }}

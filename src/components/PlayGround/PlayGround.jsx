@@ -14,6 +14,7 @@ export default class PlayGround extends React.Component {
     this.state = {
       extraUrl: "",
       extraJson: "",
+      response: undefined,
       status: "start"
     };
   }
@@ -42,7 +43,7 @@ export default class PlayGround extends React.Component {
       try {
         JSON.parse(this.state.extraJson);
 
-        this.setState({ status: "loading", response: "" }, () => {
+        this.setState({ status: "loading", response: undefined }, () => {
           axios
             .post(url, d)
             .then(r => {
@@ -57,7 +58,7 @@ export default class PlayGround extends React.Component {
         console.log("invalid json");
       }
     } else {
-      this.setState({ status: "loading", response: "" }, () => {
+      this.setState({ status: "loading", response: undefined }, () => {
         axios
           .get(url)
           .then(r => {
@@ -82,7 +83,7 @@ export default class PlayGround extends React.Component {
       <div styleName="PlayGround">
         <Title>Playground</Title>
         <div style={{ height: 12 }} />
-        <div>Add URL parameters:</div>
+        <div styleName="subTitle">Add URL parameters:</div>
         <div style={{ height: 8 }} />
         <div styleName="inputs">
           ...{"&pid=" + pid + "&func=" + fid}&
@@ -95,7 +96,7 @@ export default class PlayGround extends React.Component {
           />
         </div>
         <div style={{ height: 12 }} />
-        <div>Post JSON:</div>
+        <div styleName="subTitle">Post JSON:</div>
         <div style={{ height: 8 }} />
         <textarea
           value={this.state.extraJson}
@@ -105,6 +106,7 @@ export default class PlayGround extends React.Component {
         />
         <div style={{ height: 8 }} />
         <BigButton
+          cta
           loading={this.state.status == "loading"}
           onClick={() => {
             this.sendRequest();
@@ -118,11 +120,13 @@ export default class PlayGround extends React.Component {
           {this.state.status == "done" && "Done!"}
         </BigButton>
         <div style={{ height: 12 }} />
-        Response:
+        <div styleName="subTitle">Response:</div>
         <div style={{ height: 8 }} />
         <div styleName="response">
           {JSON.stringify(this.state.response, null, 4)}
         </div>
+
+        <div style={{ height: 24 }} />
       </div>
     );
   }
