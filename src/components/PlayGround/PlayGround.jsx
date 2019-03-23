@@ -85,9 +85,17 @@ export default class PlayGround extends React.Component {
         <div style={{ height: 12 }} />
         <div styleName="subTitle">Add URL parameters:</div>
         <div style={{ height: 8 }} />
-        <div styleName="inputs">
+        <div
+          styleName="inputs"
+          onClick={() => {
+            this.ref && this.ref.focus();
+          }}
+        >
           ...{"&pid=" + pid + "&func=" + fid}&
           <input
+            ref={ref => {
+              this.ref = ref;
+            }}
             value={this.state.extraUrl}
             placeholder="extraParam1=..."
             onChange={e => {

@@ -9,7 +9,8 @@ export default class LogViewer extends React.Component {
     super(props);
 
     this.state = {
-      open: false
+      open: false,
+      refreshKey: 1
     };
   }
 
@@ -25,7 +26,7 @@ export default class LogViewer extends React.Component {
     //console.log(path);
     return (
       <div styleName="LogViewer">
-        {!this.state.open && (
+        {!this.state.open ? (
           <>
             <BigButton
               onClick={() => {
@@ -35,9 +36,18 @@ export default class LogViewer extends React.Component {
               View logs
             </BigButton>
           </>
+        ) : (
+          <BigButton
+            onClick={() => {
+              this.setState({ refreshKey: this.state.refreshKey + 1 });
+            }}
+          >
+            Refresh
+          </BigButton>
         )}
         {this.state.open && (
           <FirebaseTable
+            key={this.state.refreshKey}
             showEnd
             path={path}
             pageSize={7}
