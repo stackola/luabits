@@ -5,12 +5,17 @@ const sendNewProject = firebase.functions().httpsCallable("newProject");
 const sendAddBucket = firebase.functions().httpsCallable("addBucket");
 const sendAddFunction = firebase.functions().httpsCallable("addFunction");
 const sendUpdateFunction = firebase.functions().httpsCallable("updateFunction");
+const sendForkFunction = firebase.functions().httpsCallable("forkFunction");
 
 const getPubFunc = firebase.functions().httpsCallable("getPublicFunction");
 const getPubProj = firebase.functions().httpsCallable("getPublicProject");
 
 export function getPublicFunction(payload) {
   return getPubFunc(payload);
+}
+
+export function forkFunction(payload) {
+  return sendForkFunction(payload);
 }
 
 export function getPublicProject(payload) {

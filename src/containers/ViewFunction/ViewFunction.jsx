@@ -11,6 +11,7 @@ import LuaBox from "../../components/LuaBox/LuaBox";
 import PlayGround from "../../components/PlayGround/PlayGround";
 import BackToProject from "../../components/BackToProject/BackToProject";
 import Loading from "../../components/Loading/Loading";
+import ForkButton from "../../components/ForkButton/ForkButton";
 
 @connect(
   mapStateToProps,
@@ -46,7 +47,18 @@ class ViewFunction extends React.Component {
     let func = this.state.func;
     let proj = this.state.proj;
     return func ? (
-      <Wrapper title={"Function " + func.name}>
+      <Wrapper
+        title={
+          <>
+            Function {func.name}
+            <div style={{ flex: 1 }} />
+            <ForkButton
+              name={func.name}
+              funcData={{ uid: proj.user, pid: proj.id, fid: func.name }}
+            />
+          </>
+        }
+      >
         <div style={{ height: 12 }} />
         <LuaBox value={func.source} onChange={() => {}} readOnly />
         <PlayGround fid={func.name} pid={proj.id} uid={proj.user} />

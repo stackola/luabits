@@ -15,6 +15,73 @@ const cors = require("cors")({
 //  response.send("Hello from Firebase!");
 // });
 
+exports.forkFunction = functions.https.onCall((data, context) => {
+  const loggedInUid = context.auth.uid;
+  if (!context.auth) {
+    // Throwing an HttpsError so that the client gets the error details.
+    return { status: "error", text: "Not authenticated" };
+  }
+
+  //let loggedInUid = "g7cJlONn6DfNcM6yXwPKpc1C5ul2";
+  let uid = data.f.uid;
+  let pid = data.f.pid;
+  let fid = data.f.fid;
+  let target = data.target;
+  let name = data.name;
+  let projectRef = db
+    .collection("users")
+    .doc(uid)
+    .collection("projects")
+    .doc(pid);
+  let funcRef = projectRef.collection("functions").doc(fid);
+
+  return projectRef.get().then(pSnap => {
+    let pData = pSnap.data();
+    return funcRef.get().then(fSnap => {
+      let fData = fSnap.data();
+      if (pData && fData && (fData.public || pData.public)) {
+        // If target exists, create func in target.
+        let userProjRef = db
+          .collection("users")
+          .doc(loggedInUid)
+          .collection("projects")
+          .doc(target);
+        return userProjRef.get().then(userProjSnap => {
+          if (userProjSnap.exists) {
+            let newF = Object.assign({}, fData, {
+              project: target,
+              name: sanitize(name),
+              time: new Date(),
+              public: false
+            });
+            console.log("Making new func", newF);
+            return userProjRef
+              .collection("functions")
+              .doc(newF.name)
+              .create(newF)
+              .then(() => {
+                return {
+                  status: "ok",
+                  newFunc: newF
+                };
+              })
+              .catch(() => {
+                return {
+                  status: "error",
+                  text: "Could not fork. Name already taken?"
+                };
+              });
+          } else {
+            return { status: "error", text: "Target not found." };
+          }
+        });
+      } else {
+        return { status: "error", text: "Function not found or not public." };
+      }
+    });
+  });
+});
+
 exports.getPublicFunction = functions.https.onCall((data, context) => {
   let uid = data.uid;
   let pid = data.pid;
@@ -550,7 +617,7 @@ exports.updateFunction = functions.https.onCall((data, context) => {
   //TODO: Check if user can create more.
   let pid = data.pid;
   let newData = {
-    pid: pid
+    project: pid
   };
   if (data.source) {
     newData.source = data.source;

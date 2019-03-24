@@ -1,0 +1,40 @@
+@import "../../less/variables.less";
+
+.ForkButton {
+  position: relative;
+}
+
+.inner {
+  position: absolute;
+  top: 100%;
+  z-index: 99;
+  right: 0;
+  font-size: 14px;
+  background-color: darken(@background, 5%);
+  padding: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  > input {
+    background-color: lighten(@background, 5%);
+    outline: none;
+    border: none;
+    color: white;
+    padding: 4px;
+    font-weight: bold;
+  }
+}
+
+.row {
+  cursor: pointer;
+  font-weight: normal;
+  background: darken(@background, 10%);
+  margin-bottom: 4px;
+  padding: 4px;
+  &:hover {
+    background: darken(@background, 1%);
+  }
+}

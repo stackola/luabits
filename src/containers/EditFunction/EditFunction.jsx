@@ -63,7 +63,11 @@ class EditFunction extends React.Component {
               pid: pid,
               name: this.state.name,
               source: this.state.code,
-              byteCode: byteCode
+              byteCode: byteCode,
+              public:
+                this.state.pubOverride ||
+                (typeof this.state.pubOverride == "undefined" &&
+                  this.state.public)
             })
               .then(() => {
                 this.setState({ status: "done" });
